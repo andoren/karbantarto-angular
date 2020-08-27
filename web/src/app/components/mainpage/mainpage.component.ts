@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {JobModel} from '../../Models/JobModel';
 
 @Component({
   selector: 'app-mainpage',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainpageComponent implements OnInit {
 
-  constructor() { }
+  jobs:JobModel[] = [];
+  tempJob:JobModel;
+  constructor() {
+      this.tempJob = new JobModel();
+      this.tempJob.setId(1);
+      this.jobs.push(this.tempJob);
+   }
 
   ngOnInit(): void {
   }

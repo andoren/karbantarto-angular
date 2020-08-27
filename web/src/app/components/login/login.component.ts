@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router  } from '@angular/router';
+import { AuthguardService } from 'src/app/services/authguard.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,9 @@ import { Router  } from '@angular/router';
 })
 
 export class LoginComponent implements OnInit {
-  loggedIn:boolean = true;
-  constructor(router:Router) { 
-    if(this.loggedIn)router.navigate([""]);
+
+  constructor(router:Router, authguard:AuthguardService) { 
+    if(authguard.isLoggedIn)router.navigate([""]);
   }
 
   ngOnInit(): void {

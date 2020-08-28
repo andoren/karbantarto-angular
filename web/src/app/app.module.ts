@@ -5,17 +5,26 @@ import { AppComponent } from './app.component';
 import {MainpageComponent} from './components/mainpage/mainpage.component';
 import {LoginComponent} from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {NavbarComponent} from './components/navbar/navbar.component'
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatGridListModule
+    
     
   ],
   providers: [],

@@ -10,6 +10,8 @@ export class JobModel{
     private _owner:UserModel;
     private _worker:UserModel;
 
+
+
     getId():Number{
         return this._id;
     }
@@ -31,11 +33,20 @@ export class JobModel{
     getProceedDate():Date{
         return this._proceedDate;
     }
+    setProceedDate(proceedDate:Date):void{
+        this._proceedDate = proceedDate;
+    }
     getCreatedDate():Date{
         return this._createdDate;
     }
+    setCreatedDate(createdDate:Date):void{
+        this._createdDate = createdDate;
+    }
     getDoneDate():Date{
         return this._doneDate;
+    }
+    setDoneDate(doneDate:Date):void{
+        this._doneDate = doneDate;
     }
     setOwner(owner:UserModel){
         this._owner = owner;

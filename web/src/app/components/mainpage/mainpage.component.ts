@@ -23,8 +23,7 @@ export class MainpageComponent implements OnInit {
     this.tempJob.setId(1);
     this.tempJob.setDescription("Elromlott az emeleti 4-es szobábana wc lehúzójának a kiscicájának az izébizéje.");
     this.tempJob.setTitle("Elromlott Emelet WC");
-    this.tempJob.setOwner(new UserModel());
-    this.tempJob.setWorker(new UserModel());
+    this.tempJob.setOwner(new UserModel("Kovács Éva"));
     this.tempJob.setCreatedDate(new Date());
 
     this.jobs.push(this.tempJob);
@@ -33,8 +32,8 @@ export class MainpageComponent implements OnInit {
     this.tempJob.setId(2);
     this.tempJob.setDescription("Elromlott az földszinti 23-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     this.tempJob.setTitle("Elromlott Földszint WC");
-    this.tempJob.setOwner(new UserModel());
-    this.tempJob.setWorker(new UserModel());
+    this.tempJob.setOwner(new UserModel("Stuller Istvánné"));
+    this.tempJob.setWorker(new UserModel("Pekár Mihály"));
     this.tempJob.setCreatedDate(new Date());
     this.tempJob.setProceedDate(new Date());
     this.jobs.push(this.tempJob);
@@ -43,13 +42,16 @@ export class MainpageComponent implements OnInit {
     this.tempJob.setId(3);
     this.tempJob.setDescription("Elromlott az szenvedély 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     this.tempJob.setTitle("Elromlott Szenvedély TV");
-    this.tempJob.setOwner(new UserModel());
-    this.tempJob.setWorker(new UserModel());
+    this.tempJob.setOwner(new UserModel("Litauszki János"));
+    this.tempJob.setWorker(new UserModel("Sárkány János"));
     this.tempJob.setCreatedDate(new Date());
     this.tempJob.setProceedDate(new Date());
     this.jobs.push(this.tempJob);
   }
   jobIsMine():boolean{
+    return false;
+  }
+  isUserJanitor():boolean{
     return true;
   }
 }

@@ -1,4 +1,8 @@
 export class UserModel{
+ 
+    constructor(fullname:String){
+        this._fullname = fullname;
+    }
     private _fullname:String;
 
     getFullname():String{

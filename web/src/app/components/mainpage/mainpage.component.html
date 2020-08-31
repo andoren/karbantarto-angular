@@ -10,7 +10,7 @@
                     <p>
                         {{job.getDescription()}}
                         <br/>
-                        <small><bold>Beíró:</bold> {{job.getOwner().getFullname()}} <bold>Feltéve:</bold> {{job.getCreatedDate()}}</small>
+                        <small><bold>Beíró:</bold> {{job.getOwner().getFullname()}} <bold>Feltéve:</bold> {{job.getCreatedDate() | date:'short'}}</small>
                     </p>                        
                     <button *ngIf="isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
                     <button *ngIf="jobIsMine()" mat-raised-button color="primary">Módosítás</button>

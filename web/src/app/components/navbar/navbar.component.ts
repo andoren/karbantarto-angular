@@ -19,7 +19,7 @@ export class NavbarComponent {
   title:String;
   constructor(private breakpointObserver: BreakpointObserver, private authguard:AuthguardService) {
     this.title = "Karbantartó";
-    console.log(this.authguard.getUser().getFullname())
+
   }
   getUserFullname():String{
  

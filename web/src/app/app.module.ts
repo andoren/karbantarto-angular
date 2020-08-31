@@ -9,6 +9,9 @@ import {NavbarComponent} from './components/navbar/navbar.component'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +26,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    MatGridListModule
-    
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatDividerModule
     
   ],
   providers: [],

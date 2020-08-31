@@ -1,3 +1,19 @@
 <div>
-    <p>{{jobs[0].getId()}}</p>
+    <div>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Elévgezndő feladatok listája</mat-card-title>
+            </mat-card-header>
+            <mat-card-content *ngFor="let job of jobs">
+                <mat-card>
+                    <h3>{{job.getTitle()}}</h3>
+                    <p>{{job.getDescription()}}</p>
+                    <small>Beíró: {{job.getOwner().getFullname()}}</small>
+                    <mat-divider></mat-divider>
+                    <button mat-raised-button color="primary">Elválalom</button>
+                    <button *ngIf="jobIsMine()" mat-raised-button color="warn">Törlés</button>
+                </mat-card>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

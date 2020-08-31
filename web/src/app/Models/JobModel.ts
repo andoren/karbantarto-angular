@@ -8,8 +8,6 @@ export class JobModel{
     private _proceedDate:Date;
     private _doneDate:Date;
     private _owner:UserModel;
-    private _isAccapted:boolean;
-    private _proceed:boolean;
     private _worker:UserModel;
 
     getId():Number{
@@ -18,5 +16,37 @@ export class JobModel{
     setId(id:Number):void{
         this._id = id;
     }
-    
+    setTitle(title:String):void{
+        this._title = title;
+    }
+    getTitle():String{
+        return this._title;
+    }
+    setDescription(description:String):void{
+        this._description = description;
+    }
+    getDescription():String{
+        return this._description;
+    }
+    getProceedDate():Date{
+        return this._proceedDate;
+    }
+    getCreatedDate():Date{
+        return this._createdDate;
+    }
+    getDoneDate():Date{
+        return this._doneDate;
+    }
+    setOwner(owner:UserModel){
+        this._owner = owner;
+    }
+    getOwner():UserModel{
+        return this._owner;
+    }
+    setWorker(worker:UserModel){
+        this._worker = worker;
+    }
+    getWorker():UserModel{
+        return this._worker;
+    }
 }

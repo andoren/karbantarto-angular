@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ObserversModule } from '@angular/cdk/observers';
 import { of } from "rxjs";
 import { delay } from 'rxjs/operators';
+import { Role } from '../Models/role.enum';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +20,7 @@ export class JobService {
     tempJob.setId(1);
     tempJob.setDescription("Elromlott az Demens 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Demens TV");
-    tempJob.setOwner(new UserModel("Körmendi Szilvia"));
+    tempJob.setOwner(new UserModel(6,"Körmendi Szilvia",Role.User));
     tempJob.setCreatedDate(new Date());
 
     jobs.push(tempJob);
@@ -27,7 +28,7 @@ export class JobService {
     tempJob.setId(2);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Szenvedély WC");
-    tempJob.setOwner(new UserModel("Litauszki János"));
+    tempJob.setOwner(new UserModel(2,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
 
     jobs.push(tempJob);  
@@ -35,7 +36,7 @@ export class JobService {
     tempJob.setId(3);
     tempJob.setDescription("Elromlott az földsznit 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Földszint TV");
-    tempJob.setOwner(new UserModel("Stuller Istvánné"));
+    tempJob.setOwner(new UserModel(7,"Stuller Istvánné",Role.User));
     tempJob.setCreatedDate(new Date());
 
     jobs.push(tempJob);
@@ -43,7 +44,7 @@ export class JobService {
     tempJob.setId(4);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Szenvedély TV");
-    tempJob.setOwner(new UserModel("Litauszki János"));
+    tempJob.setOwner(new UserModel(2,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
     jobs.push(tempJob);  
   return of(jobs).pipe(delay(1000));
@@ -57,8 +58,8 @@ export class JobService {
       tempJob.setId(4);
       tempJob.setDescription("Elromlott az Demens 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
       tempJob.setTitle("Elromlott Szenvedély TV");
-      tempJob.setOwner(new UserModel("Körmendi Szilvia"));
-      tempJob.setWorker(new UserModel("Sárkány János"));
+      tempJob.setOwner(new UserModel(4,"Körmendi Szilvia",Role.User));
+      tempJob.setWorker(new UserModel(5,"Sárkány János",Role.Janitor));
       tempJob.setCreatedDate(new Date());
   
       jobs.push(tempJob);
@@ -66,8 +67,8 @@ export class JobService {
       tempJob.setId(5);
       tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
       tempJob.setTitle("Elromlott Szenvedély TV");
-      tempJob.setOwner(new UserModel("Litauszki János"));
-      tempJob.setWorker(new UserModel("Pekár Mihály"));
+      tempJob.setOwner(new UserModel(2,"Litauszki János",Role.User));
+      tempJob.setWorker(new UserModel(3,"id.Pekár Mihály",Role.Janitor));
       tempJob.setCreatedDate(new Date());
      
       jobs.push(tempJob);  
@@ -82,8 +83,8 @@ export class JobService {
     tempJob.setId(14);
     tempJob.setDescription("Szerver terem évek óta beázik ezért salétromos lett a fal. Ennek a hibának a kiküszöbölésére van szükség. Utána a szerver terem meszelésére is.");
     tempJob.setTitle("A szerver terem beázás");
-    tempJob.setOwner(new UserModel("Pekár Mihály"));
-    tempJob.setWorker(new UserModel("id. Pekár Mihály"));
+    tempJob.setOwner(new UserModel(1,"Pekár Mihály",Role.Admin));
+    tempJob.setWorker(new UserModel(3,"id. Pekár Mihály",Role.Janitor));
     tempJob.setCreatedDate(new Date());
     tempJob.setDoneDate(new Date());
     jobs.push(tempJob);
@@ -91,8 +92,8 @@ export class JobService {
     tempJob.setId(10);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobában a tv ");
     tempJob.setTitle("Elromlott Szenvedély TV");
-    tempJob.setOwner(new UserModel("Litauszki János"));
-    tempJob.setWorker(new UserModel("Sárkány János"));
+    tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
+    tempJob.setWorker(new UserModel(5,"Sárkány János",Role.Janitor));
     tempJob.setCreatedDate(new Date());
     tempJob.setDoneDate(new Date());
     jobs.push(tempJob);  

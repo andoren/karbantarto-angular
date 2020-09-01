@@ -2,6 +2,7 @@ import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import {JobModel} from '../../Models/JobModel';
 import { AuthguardService } from 'src/app/services/authguard.service';
 import {JobService} from '../../services/job.service';
+import { Role } from 'src/app/Models/role.enum';
 
 @Component({
   selector: 'app-mainpage',
@@ -34,13 +35,13 @@ export class MainpageComponent implements OnInit {
       this.currentMonthJobs = jobs;
     });
   }
-  jobIsMine():boolean{
-    return false;
+  jobIsMine(job:JobModel):boolean{
+    return this.authGuard.getLoggedInUser().getId() == job.getOwner().getId();
   }
   isUserJanitor():boolean{
-    return true;
+    return this.authGuard.getLoggedInUser().getRole() == Role.Janitor;
   }
-  iStartedTheJob():boolean{
-    return true;
+  iStartedTheJob(job:JobModel):boolean{
+    return this.authGuard.getLoggedInUser().getId() == job.getWorker().getId();
   }
 }

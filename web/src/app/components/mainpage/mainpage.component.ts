@@ -12,7 +12,8 @@ export class MainpageComponent implements OnInit {
 
 
   inProgressJobs:JobModel[] = [];
-  newJobs:JobModel[] = []
+  newJobs:JobModel[] = [];
+  currentMonthJobs:JobModel[]=[];
   constructor(private authGuard:AuthguardService, private jobService:JobService) {
     this.generateTempData()
    }
@@ -28,6 +29,10 @@ export class MainpageComponent implements OnInit {
      
       this.newJobs = jobs;
     });
+    this.jobService.getCurrentMonthDoneJobs().subscribe((jobs)=>{
+     
+      this.currentMonthJobs = jobs;
+    });
   }
   jobIsMine():boolean{
     return false;
@@ -35,5 +40,7 @@ export class MainpageComponent implements OnInit {
   isUserJanitor():boolean{
     return true;
   }
-  
+  iStartedTheJob():boolean{
+    return true;
+  }
 }

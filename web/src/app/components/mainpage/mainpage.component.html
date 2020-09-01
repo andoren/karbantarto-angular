@@ -1,7 +1,6 @@
-<div>
-    <div>
-        <mat-card>
-            <mat-card-header>
+<div class="maindiv">
+    <div>       
+           <mat-card-header >
                 <mat-card-title>Elvégzendő feladatok listája</mat-card-title>
             </mat-card-header>
             <div *ngIf="newJobs.length != 0; else elseBlock">
@@ -10,9 +9,12 @@
                         <h3>{{job.getTitle()}}</h3>
                         <p>
                             {{job.getDescription()}}
-                            <br/>
-                            <small><bold>Beíró:</bold> {{job.getOwner().getFullname()}} <bold>Feltéve:</bold> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</small>
-                        </p>                        
+                        </p>                  
+                        <div style="width:100%; display:float">
+                            <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p style="width: 50%; float:right"></p>
+                            <p style="  clear: both;"></p>
+                        </div>                  
                         <button *ngIf="isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
                         <button *ngIf="jobIsMine()" mat-raised-button color="primary">Módosítás</button>
                         <button *ngIf="jobIsMine()" mat-raised-button color="warn">Törlés</button>
@@ -20,10 +22,10 @@
                 </mat-card-content>
             </div>
             <ng-template #elseBlock>Gratulálok nincs több elvégzendő feladat! <mat-icon style="margin-left: 5px;" aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon></ng-template>
-        </mat-card>
+      
     </div>
     <div style="margin-top: 20px;">
-        <mat-card>
+        
             <mat-card-header>
                 <mat-card-title>Folyamatban lévő feladatok listája</mat-card-title>
             </mat-card-header>
@@ -33,16 +35,73 @@
                         <h3>{{job.getTitle()}}</h3>
                         <p>
                             {{job.getDescription()}}
-                            <br/>
-                            <small><bold>Beíró:</bold> {{job.getOwner().getFullname()}} <bold>Feltéve:</bold> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</small>
-                        </p>                        
-                        <button *ngIf="isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
-                        <button *ngIf="jobIsMine()" mat-raised-button color="primary">Módosítás</button>
-                        <button *ngIf="jobIsMine()" mat-raised-button color="warn">Törlés</button>
+                        </p>                  
+                        <div style="width:100%; display:float">
+                            <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p style="width: 50%; float:right"><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
+                            <p style="  clear: both;"></p>
+                        </div>            
+                        <button *ngIf="iStartedTheJob()" mat-raised-button color="primary">Kész</button>
+                       
+                  
                     </mat-card>
                 </mat-card-content>
             </div>
             <ng-template #elseBlock>Gratulálok nincs több elvégzendő feladat! <mat-icon style="margin-left: 5px;" aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon></ng-template>
-        </mat-card>
+        
     </div>
+    <div *ngIf="isUserJanitor()" style="margin-top: 20px;">
+        
+        <mat-card-header>
+            <mat-card-title>Ellenőrizendő feladatok listája</mat-card-title>
+        </mat-card-header>
+        <div *ngIf="inProgressJobs.length != 0; else elseBlock">
+            <mat-card-content  *ngFor="let job of inProgressJobs">
+                <mat-card >
+                    <h3>{{job.getTitle()}}</h3>
+                    <p>
+                        {{job.getDescription()}}
+                    </p>                  
+                    <div style="width:100%; display:float">
+                        <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                        <p style="width: 50%; float:right"><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
+                        <p style="  clear: both;"></p>
+                    </div>            
+                    <div *ngIf="jobIsMine()">
+                        <button  mat-raised-button color="primary">Hitelesít</button>
+                        <button mat-raised-button color="warn">Visszadob</button>
+                    </div>
+    
+              
+                </mat-card>
+            </mat-card-content>
+        </div>
+        <ng-template #elseBlock>Gratulálok nincs több elvégzendő feladat! <mat-icon style="margin-left: 5px;" aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon></ng-template>
+    
+</div>
+    <div *ngIf="isUserJanitor()" style="margin-top: 20px;">       
+        <mat-card-header>
+            <mat-card-title>Havi elvégzett feladatok listája</mat-card-title>
+        </mat-card-header>
+        <div *ngIf="inProgressJobs.length != 0; else elseBlock">
+            <mat-card-content  *ngFor="let job of currentMonthJobs">
+                <mat-card>
+                    <h3>{{job.getTitle()}}</h3>
+                    <p>
+                        {{job.getDescription()}}
+                    </p>  
+                 
+                        <div style="width:100%; display:float">
+                            <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p style="width: 50%; float:right"><b>A feladatot elvégezte:</b> {{job.getWorker().getFullname()}}<br/>  <b>Feladat elkészítve:</b> {{job.getDoneDate() | date:'yyyy-MM-dd'}}</p>
+                            <p style="  clear: both;"></p>
+                        </div>
+                                        
+
+                </mat-card>
+            </mat-card-content>
+        </div>
+        <ng-template #elseBlock>Nincs még ebben a hónapban elvégzett feladat.<mat-icon style="margin-left: 5px;" aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon></ng-template>
+    
+</div>
 </div>

@@ -74,5 +74,29 @@ export class JobService {
     return of(jobs).pipe(delay(1000));
 
   }
+  getCurrentMonthDoneJobs():Observable<any>{
  
+    let jobs:JobModel[] = [];
+    let tempJob:JobModel;
+    tempJob = new JobModel();
+    tempJob.setId(14);
+    tempJob.setDescription("Szerver terem évek óta beázik ezért salétromos lett a fal. Ennek a hibának a kiküszöbölésére van szükség. Utána a szerver terem meszelésére is.");
+    tempJob.setTitle("A szerver terem beázás");
+    tempJob.setOwner(new UserModel("Pekár Mihály"));
+    tempJob.setWorker(new UserModel("id. Pekár Mihály"));
+    tempJob.setCreatedDate(new Date());
+    tempJob.setDoneDate(new Date());
+    jobs.push(tempJob);
+    tempJob = new JobModel();
+    tempJob.setId(10);
+    tempJob.setDescription("Elromlott az 4-es épület 1230-as szobában a tv ");
+    tempJob.setTitle("Elromlott Szenvedély TV");
+    tempJob.setOwner(new UserModel("Litauszki János"));
+    tempJob.setWorker(new UserModel("Sárkány János"));
+    tempJob.setCreatedDate(new Date());
+    tempJob.setDoneDate(new Date());
+    jobs.push(tempJob);  
+  return of(jobs).pipe(delay(1000));
+
+}
 }

@@ -11,8 +11,8 @@
                             {{job.getDescription()}}
                         </p>                  
                         <div style="width:100%; display:float">
-                            <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
-                            <p style="width: 50%; float:right"></p>
+                            <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p class="rightsideinformation"  >
                             <p style="  clear: both;"></p>
                         </div>                  
                         <button *ngIf="isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
@@ -37,8 +37,8 @@
                             {{job.getDescription()}}
                         </p>                  
                         <div style="width:100%; display:float">
-                            <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
-                            <p style="width: 50%; float:right"><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
+                            <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
                             <p style="  clear: both;"></p>
                         </div>            
                         <button *ngIf="iStartedTheJob(job)" mat-raised-button color="primary">Kész</button>
@@ -64,9 +64,9 @@
                         {{job.getDescription()}}
                     </p>                  
                     <div style="width:100%; display:float">
-                        <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
-                        <p style="width: 50%; float:right"><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
-                        <p style="  clear: both;"></p>
+                        <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                        <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
+                        <p style="clear: both;"></p>
                     </div>            
                     <div *ngIf="jobIsMine(job)">
                         <button  mat-raised-button color="primary" >Hitelesít</button>
@@ -93,8 +93,8 @@
                         {{job.getDescription()}}
                     </p>                   
                         <div style="width:100%; display:float">
-                            <p style="width: 50%; float:left" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
-                            <p style="width: 50%; float:right"><b>A feladatot elvégezte:</b> {{job.getWorker().getFullname()}}<br/>  <b>Feladat elkészítve:</b> {{job.getDoneDate() | date:'yyyy-MM-dd'}}</p>
+                            <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p class="rightsideinformation"  ><b>A feladatot elvégezte:</b> {{job.getWorker().getFullname()}}<br/>  <b>Feladat elkészítve:</b> {{job.getDoneDate() | date:'yyyy-MM-dd'}}</p>
                             <p style="clear: both;"></p>
                         </div>                                       
                 </mat-card>

@@ -5,3 +5,16 @@
 .mat-divider {
     border-top-color: #3f51b5;
 }
+.leftsideinformation{
+    border-right: 1px solid #3f51b5;
+    padding:5px;
+    width: 50%; 
+    float:left;
+    min-height: 50px;
+}
+.rightsideinformation{
+    min-height: 50px;
+    padding:5px;
+    width: 50%; 
+    float:right;
+}

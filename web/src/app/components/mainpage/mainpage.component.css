@@ -6,7 +6,7 @@
     border-top-color: #3f51b5;
 }
 .leftsideinformation{
-    border-right: 1px solid #3f51b5;
+    border-right: 1px solid lightgray;
     padding:5px;
     width: 50%; 
     float:left;
@@ -19,9 +19,21 @@
     float:right;
 }
 .jobtitle{
-    border: 2px solid #9d00ff;
+    border: 2px solid #3f51b5;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    background-color:#9d00ff;
+    background-color:#3f51b5;
     color:white;
+}
+.addbuttoncontainer{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:4em;
+    height:4em;
+}
+.mat-icon {
+     display: inline-flex; 
+     vertical-align: text-bottom;
+     margin-right: 5px;
 }

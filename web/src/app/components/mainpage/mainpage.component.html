@@ -5,18 +5,22 @@
             </mat-card-header>
             <div *ngIf="newJobs.length != 0; else elseBlock">
                 <mat-card-content  *ngFor="let job of newJobs">
+                    <div class="jobtitle">
+                    <h3 style="text-align: center; margin:0">{{job.getTitle()}}</h3>
+                    </div>
                     <mat-card>
-                        <h3>{{job.getTitle()}}</h3>
+                      
                         <p>
                             {{job.getDescription()}}
                         </p>                  
                         <div style="width:100%; display:float">
-                            <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                            <p style="  border-right: 0px" class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
                             <p class="rightsideinformation"  >
                             <p style="  clear: both;"></p>
                         </div>                  
                         <button *ngIf="isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
-                        <button *ngIf="jobIsMine(job)" mat-raised-button color="primary">Módosítás</button>
+                        <button  *ngIf="jobIsMine(job)" mat-raised-button color="primary">Módosítás</button>
+                        &nbsp;
                         <button *ngIf="jobIsMine(job)" mat-raised-button color="warn">Törlés</button>
                     </mat-card>
                 </mat-card-content>
@@ -31,8 +35,11 @@
             </mat-card-header>
             <div *ngIf="inProgressJobs.length != 0; else elseBlock">
                 <mat-card-content  *ngFor="let job of inProgressJobs">
+                    <div class="jobtitle">
+                        <h3 style="text-align: center; margin:0">{{job.getTitle()}}</h3>
+                        </div>
                     <mat-card>
-                        <h3>{{job.getTitle()}}</h3>
+                 
                         <p>
                             {{job.getDescription()}}
                         </p>                  
@@ -58,8 +65,11 @@
         </mat-card-header>
         <div *ngIf="inProgressJobs.length != 0; else elseBlock">
             <mat-card-content  *ngFor="let job of inProgressJobs">
+                <div class="jobtitle">
+                    <h3 style="text-align: center; margin:0">{{job.getTitle()}}</h3>
+                    </div>
                 <mat-card >
-                    <h3>{{job.getTitle()}}</h3>
+                
                     <p>
                         {{job.getDescription()}}
                     </p>                  
@@ -70,6 +80,7 @@
                     </div>            
                     <div *ngIf="jobIsMine(job)">
                         <button  mat-raised-button color="primary" >Hitelesít</button>
+                        &nbsp;
                         <button mat-raised-button color="warn">Visszadob</button>
                     </div>
     
@@ -80,15 +91,18 @@
         <ng-template #elseBlock>Gratulálok nincs több elvégzendő feladat! <mat-icon style="margin-left: 5px;" aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon></ng-template>
     
     </div>
-<mat-divider></mat-divider>
+
     <div *ngIf="isUserJanitor()" style="margin-top: 20px;">       
         <mat-card-header>
             <mat-card-title>Havi elvégzett feladatok listája</mat-card-title>
         </mat-card-header>
         <div *ngIf="inProgressJobs.length != 0; else elseBlock">
             <mat-card-content  *ngFor="let job of currentMonthJobs">
+                <div class="jobtitle">
+                    <h3 style="text-align: center; margin:0">{{job.getTitle()}}</h3>
+                    </div>
                 <mat-card>
-                    <h3>{{job.getTitle()}}</h3>
+                   
                     <p>
                         {{job.getDescription()}}
                     </p>                   

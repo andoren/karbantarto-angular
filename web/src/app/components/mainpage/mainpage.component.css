@@ -18,3 +18,10 @@
     width: 50%; 
     float:right;
 }
+.jobtitle{
+    border: 2px solid #9d00ff;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color:#9d00ff;
+    color:white;
+}

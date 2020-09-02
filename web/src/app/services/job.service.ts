@@ -20,7 +20,7 @@ export class JobService {
     tempJob.setId(1);
     tempJob.setDescription("Elromlott az Demens 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Demens TV");
-    tempJob.setOwner(new UserModel(6,"Körmendi Szilvia",Role.User));
+    tempJob.setOwner(new UserModel(4,"Körmendi Szilvia",Role.User));
     tempJob.setCreatedDate(new Date());
 
     jobs.push(tempJob);
@@ -28,7 +28,7 @@ export class JobService {
     tempJob.setId(2);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Szenvedély WC");
-    tempJob.setOwner(new UserModel(2,"Litauszki János",Role.User));
+    tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
 
     jobs.push(tempJob);  
@@ -44,7 +44,7 @@ export class JobService {
     tempJob.setId(4);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Szenvedély TV");
-    tempJob.setOwner(new UserModel(2,"Litauszki János",Role.User));
+    tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
     jobs.push(tempJob);  
   return of(jobs).pipe(delay(1000));
@@ -67,7 +67,7 @@ export class JobService {
       tempJob.setId(5);
       tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
       tempJob.setTitle("Elromlott Szenvedély TV");
-      tempJob.setOwner(new UserModel(2,"Litauszki János",Role.User));
+      tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
       tempJob.setWorker(new UserModel(3,"id.Pekár Mihály",Role.Janitor));
       tempJob.setCreatedDate(new Date());
      

@@ -35,13 +35,5 @@ export class MainpageComponent implements OnInit {
       this.currentMonthJobs = jobs;
     });
   }
-  jobIsMine(job:JobModel):boolean{
-    return this.authGuard.getLoggedInUser().getId() == job.getOwner().getId();
-  }
-  isUserJanitor():boolean{
-    return this.authGuard.getLoggedInUser().getRole() == Role.Janitor;
-  }
-  iStartedTheJob(job:JobModel):boolean{
-    return this.authGuard.getLoggedInUser().getId() == job.getWorker().getId();
-  }
+
 }

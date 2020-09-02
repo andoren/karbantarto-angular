@@ -13,13 +13,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import { FooterComponent } from './components/footer/footer.component';
+import { AddjobComponent } from './components/addjob/addjob.component';
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
     LoginComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AddjobComponent
     
   ],
   imports: [

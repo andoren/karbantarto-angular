@@ -17,12 +17,12 @@ export class NavbarComponent {
       shareReplay()
     );
   title:String;
-  constructor(private breakpointObserver: BreakpointObserver, private authguard:AuthguardService) {
+  constructor(private breakpointObserver: BreakpointObserver, private authGuard:AuthguardService) {
     this.title = "Karbantartó";
 
   }
   getUserFullname():String{
  
-    return this.authguard.getLoggedInUser().getFullname();
+    return this.authGuard.getLoggedInUser().getFullname();
   }
 }

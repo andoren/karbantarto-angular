@@ -9,11 +9,20 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Főoldal <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Kiscica</a>
+      <li *ngIf="!authGuard.isUserJanitor()" class="nav-item">
+        <a class="nav-link" href="#">Munka hozzáadása</a>
+      </li>
+      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item">
+        <a class="nav-link" href="#">Felhasználó hozzáadása</a>
+      </li>
+      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item">
+        <a class="nav-link" href="#">Felhasználó módosítása</a>
+      </li>
+      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item">
+        <a class="nav-link" href="#">Felhasználó törlése</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Nagycica</a>
+        <a class="nav-link" href="#">Kijelentkezés</a>
       </li>
       <li class="nav-item">
         <a style="color:white" class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Felhasználó: {{getUserFullname() }}</a>

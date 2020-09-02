@@ -4,14 +4,14 @@
   <br>
   <mat-form-field appearance="fill">
     <mat-label>A hiba rövid leírása</mat-label>
-    <input matInput>
+    <input [formControl]="titleFormControl" matInput>
   </mat-form-field>
   <br>
   <label>Leírás:</label>
   <br>
   <mat-form-field appearance="fill">
     <mat-label>A hiba elhelyezkedéséről és mivoltjáról egy jól megfogalmazott leírása.</mat-label>
-    <textarea matInput></textarea>
+    <textarea [formControl]="descriptionFormControl" matInput></textarea>
   </mat-form-field>
   <br>
   <label>Elhelyezkedés:</label>
@@ -29,6 +29,6 @@
   </mat-form-field>
   <br>
   <div style="float:right; margin-bottom: 10px;">
-    <button  mat-raised-button color="primary">Hozzáadás</button>
+    <button (click)="addJob()" mat-raised-button color="primary">Hozzáadás</button>
   </div>
 </div>

@@ -15,6 +15,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddjobComponent } from './components/addjob/addjob.component';
 import { NewjobComponent } from './components/jobs/newjob/newjob.component';
+
 @NgModule({
   declarations: [
     AppComponent,

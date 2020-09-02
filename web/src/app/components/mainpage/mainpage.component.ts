@@ -3,6 +3,7 @@ import {JobModel} from '../../Models/JobModel';
 import { AuthguardService } from 'src/app/services/authguard.service';
 import {JobService} from '../../services/job.service';
 import { Role } from 'src/app/Models/role.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mainpage',
@@ -16,7 +17,7 @@ export class MainpageComponent implements OnInit {
   newJobs:JobModel[] = [];
   currentMonthJobs:JobModel[]=[];
   checkNeededJobs:JobModel[]=[];
-  constructor(public authGuard:AuthguardService, private jobService:JobService) {
+  constructor(public authGuard:AuthguardService, private jobService:JobService, private router:Router) {
     this.generateTempData()
    }
 
@@ -40,5 +41,8 @@ export class MainpageComponent implements OnInit {
       this.checkNeededJobs = jobs;
     });
   }
-
+  addJob(){
+  
+    this.router.navigate(["ujmunka"]);
+  }
 }

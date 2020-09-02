@@ -76,7 +76,7 @@
     
     </div>
     <div *ngIf="!authGuard.isUserJanitor()" class="addbuttoncontainer">
-        <button style="width: 100%; height: 100%;" mat-mini-fab color="primary" >
+        <button  (click)="addJob()" style="width: 100%; height: 100%;" mat-mini-fab color="primary" >
           <mat-icon style="margin:0px;" >add</mat-icon>
         </button>
       </div>

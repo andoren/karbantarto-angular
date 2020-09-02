@@ -47,7 +47,7 @@ export class JobService {
     tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
     jobs.push(tempJob);  
-  return of(jobs).pipe(delay(1000));
+  return of(jobs).pipe(delay(100));
 
 }
   getInProgressJobs():Observable<any>{
@@ -73,7 +73,7 @@ export class JobService {
       tempJob.setCreatedDate(new Date());
 
       jobs.push(tempJob);  
-    return of(jobs).pipe(delay(1000));
+    return of(jobs).pipe(delay(100));
 
   }
   getCurrentMonthDoneJobs():Observable<any>{
@@ -100,7 +100,7 @@ export class JobService {
     tempJob.setCreatedDate(new Date());
     tempJob.setDoneDate(new Date());
     jobs.push(tempJob);  
-  return of(jobs).pipe(delay(1000));
+  return of(jobs).pipe(delay(100));
 
 }
   getNeedToCheckJobs():Observable<any>{
@@ -126,6 +126,6 @@ export class JobService {
     tempJob.setCreatedDate(new Date());
 
     jobs.push(tempJob);  
-  return of(jobs).pipe(delay(1000));
+  return of(jobs).pipe(delay(100));
   }
 }

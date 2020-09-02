@@ -30,5 +30,5 @@ export class NewjobComponent implements OnInit {
   checkNeededForTheJob():boolean{
     return this.job.getWorker() && this.job.getProceedDate() != undefined ;
   }
-
+  
 }

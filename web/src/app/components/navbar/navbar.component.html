@@ -10,7 +10,7 @@
         <a class="nav-link" href="#">Főoldal <span class="sr-only">(current)</span></a>
       </li>
       <li *ngIf="!authGuard.isUserJanitor()" class="nav-item">
-        <a class="nav-link" href="#">Munka hozzáadása</a>
+        <a routerLink="ujmunka" class="nav-link" href="#">Munka hozzáadása</a>
       </li>
       <li *ngIf="authGuard.userIsAdministrator()" class="nav-item">
         <a class="nav-link" href="#">Felhasználó hozzáadása</a>

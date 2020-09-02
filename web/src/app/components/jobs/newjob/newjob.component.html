@@ -1,0 +1,42 @@
+<div class="jobtitle">
+    <h3 style="text-align: center; margin:0">{{job.getTitle()}}</h3>
+</div>
+<mat-card>
+        <p>
+            {{job.getDescription()}}
+        </p>           
+        <div *ngIf="isNewJob()">     
+            <div style="width:100%; display:float">
+                <p style="  border-right: 0px" class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                <p class="rightsideinformation"  >
+                <p style="  clear: both;"></p>
+            </div>    
+            <button *ngIf="authGuard.isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
+            <button  *ngIf="authGuard.jobIsMine(job)" mat-raised-button color="primary">Módosítás</button>
+            &nbsp;
+            <button *ngIf="authGuard.jobIsMine(job)" mat-raised-button color="warn">Törlés</button>    
+         </div>         
+         <div *ngIf="inProgressJob()" >
+            <div style="width:100%; display:float">
+                <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
+                <p style="  clear: both;"></p>
+            </div>    
+            <button *ngIf="authGuard.iStartedTheJob(job)" mat-raised-button color="primary">Kész</button>  
+         </div> 
+     
+        <div *ngIf="checkNeededForTheJob()">
+            <div style="width:100%; display:float">
+                <p class="leftsideinformation" ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
+                <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job.getWorker().getFullname()}} <br/>  <b>Feladat elkészítve:</b> {{job.getProceedDate() | date:'yyyy-MM-dd'}}</p>
+                <p style="clear: both;"></p>
+            </div>     
+            <div *ngIf="authGuard.jobIsMine(job)">
+                <button  mat-raised-button color="primary" >Hitelesít</button>
+                &nbsp;
+                <button mat-raised-button color="warn">Visszadob</button>
+            </div>
+        </div>   
+
+
+</mat-card>

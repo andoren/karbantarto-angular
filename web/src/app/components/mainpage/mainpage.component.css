@@ -5,26 +5,7 @@
 .mat-divider {
     border-top-color: #3f51b5;
 }
-.leftsideinformation{
-    border-right: 1px solid lightgray;
-    padding:5px;
-    width: 50%; 
-    float:left;
-    min-height: 50px;
-}
-.rightsideinformation{
-    min-height: 50px;
-    padding:5px;
-    width: 50%; 
-    float:right;
-}
-.jobtitle{
-    border: 2px solid #3f51b5;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    background-color:#3f51b5;
-    color:white;
-}
+
 .addbuttoncontainer{
     position:fixed;
     right:20px;

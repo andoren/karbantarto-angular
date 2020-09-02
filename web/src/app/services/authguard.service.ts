@@ -20,9 +20,9 @@ export class AuthguardService {
    }
    
     getLoggedInUser():UserModel{
-     return new UserModel(1,"Pekár Mihály",Role.Admin);
+     //return new UserModel(1,"Pekár Mihály",Role.Admin);
      //return new UserModel(6,"Litauszki János",Role.User)
-     //return new UserModel(5,"Sárkány János",Role.Janitor)
+     return new UserModel(5,"Sárkány János",Role.Janitor)
    
    }  
    jobIsMine(job:JobModel):boolean{

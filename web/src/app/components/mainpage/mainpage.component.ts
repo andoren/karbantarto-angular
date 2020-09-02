@@ -15,7 +15,8 @@ export class MainpageComponent implements OnInit {
   inProgressJobs:JobModel[] = [];
   newJobs:JobModel[] = [];
   currentMonthJobs:JobModel[]=[];
-  constructor(private authGuard:AuthguardService, private jobService:JobService) {
+  checkNeededJobs:JobModel[]=[];
+  constructor(public authGuard:AuthguardService, private jobService:JobService) {
     this.generateTempData()
    }
 
@@ -33,6 +34,10 @@ export class MainpageComponent implements OnInit {
     this.jobService.getCurrentMonthDoneJobs().subscribe((jobs)=>{
      
       this.currentMonthJobs = jobs;
+    });
+    this.jobService.getNeedToCheckJobs().subscribe((jobs)=>{
+     
+      this.checkNeededJobs = jobs;
     });
   }
 

@@ -9,8 +9,7 @@ export class JobModel{
     private _doneDate:Date;
     private _owner:UserModel;
     private _worker:UserModel;
-
-
+    private _isDone:boolean;
 
     getId():Number{
         return this._id;
@@ -59,5 +58,11 @@ export class JobModel{
     }
     getWorker():UserModel{
         return this._worker;
+    }
+    getIsDone():boolean{
+        return this._isDone;
+    }
+    setIsDone(done:boolean):void{
+        this._isDone = done;
     }
 }

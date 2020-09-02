@@ -17,7 +17,7 @@ export class NavbarComponent {
       shareReplay()
     );
   title:String;
-  constructor(private breakpointObserver: BreakpointObserver, private authGuard:AuthguardService) {
+  constructor(private breakpointObserver: BreakpointObserver, public authGuard:AuthguardService) {
     this.title = "Karbantartó";
 
   }

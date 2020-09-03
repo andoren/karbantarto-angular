@@ -1,1 +1,34 @@
-<p>addjob works!</p>
+<div class="addcontainer">
+  <h2>Új munka hozzáadása</h2>
+  <label>Cím:</label>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>A hiba rövid leírása</mat-label>
+    <input [formControl]="titleFormControl" matInput>
+  </mat-form-field>
+  <br>
+  <label>Leírás:</label>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>A hiba elhelyezkedéséről és mivoltjáról egy jól megfogalmazott leírása.</mat-label>
+    <textarea [formControl]="descriptionFormControl" matInput></textarea>
+  </mat-form-field>
+  <br>
+  <label>Elhelyezkedés:</label>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Elhelyezkedés</mat-label>
+    <mat-select>
+      <mat-option value="1">Földszint</mat-option>
+      <mat-option value="2">Emelet</mat-option>
+      <mat-option value="3">Demens</mat-option>
+      <mat-option value="4">Szenvedély</mat-option>
+      <mat-option value="5">Konyha</mat-option>
+      <mat-option value="6">Iroda</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <div style="float:right; margin-bottom: 10px;">
+    <button (click)="addJob()" mat-raised-button color="primary">Hozzáadás</button>
+  </div>
+</div>

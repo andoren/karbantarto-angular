@@ -6,15 +6,17 @@ import { ObserversModule } from '@angular/cdk/observers';
 import { of } from "rxjs";
 import { delay } from 'rxjs/operators';
 import { Role } from '../Models/role.enum';
+import { AuthguardService } from './authguard.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-
-  constructor() { }
-  getNewJobs():Observable<any>{
- 
-    let jobs:JobModel[] = [];
+  newJobs:JobModel[]=[];
+  constructor(private authGuard:AuthguardService,private router:Router) { 
+    this.generateJobs();
+  }
+  generateJobs():void{
     let tempJob:JobModel;
     tempJob = new JobModel();
     tempJob.setId(1);
@@ -23,7 +25,7 @@ export class JobService {
     tempJob.setOwner(new UserModel(4,"Körmendi Szilvia",Role.User));
     tempJob.setCreatedDate(new Date());
 
-    jobs.push(tempJob);
+    this.newJobs.push(tempJob);
     tempJob = new JobModel();
     tempJob.setId(2);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
@@ -31,7 +33,7 @@ export class JobService {
     tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
 
-    jobs.push(tempJob);  
+    this.newJobs.push(tempJob);  
     tempJob = new JobModel();
     tempJob.setId(3);
     tempJob.setDescription("Elromlott az földsznit 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
@@ -39,15 +41,18 @@ export class JobService {
     tempJob.setOwner(new UserModel(7,"Stuller Istvánné",Role.User));
     tempJob.setCreatedDate(new Date());
 
-    jobs.push(tempJob);
+    this.newJobs.push(tempJob);
     tempJob = new JobModel();
     tempJob.setId(4);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
     tempJob.setTitle("Elromlott Szenvedély TV");
     tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
     tempJob.setCreatedDate(new Date());
-    jobs.push(tempJob);  
-  return of(jobs).pipe(delay(100));
+    this.newJobs.push(tempJob);  
+  }
+  getNewJobs():Observable<any>{
+ 
+  return of(this.newJobs).pipe(delay(100));
 
 }
   getInProgressJobs():Observable<any>{
@@ -127,5 +132,11 @@ export class JobService {
 
     jobs.push(tempJob);  
   return of(jobs).pipe(delay(100));
+  }
+  addJob(job:JobModel){
+    job.setOwner(this.authGuard.getLoggedInUser());
+    job.setCreatedDate(new Date());
+    this.newJobs.push(job);
+    this.router.navigate([""]);
   }
 }

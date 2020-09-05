@@ -14,43 +14,9 @@ import { Router } from '@angular/router';
 export class JobService {
   newJobs:JobModel[]=[];
   constructor(private authGuard:AuthguardService,private router:Router) { 
-    this.generateJobs();
   }
-  generateJobs():void{
-    let tempJob:JobModel;
-    tempJob = new JobModel();
-    tempJob.setId(1);
-    tempJob.setDescription("Elromlott az Demens 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
-    tempJob.setTitle("Elromlott Demens TV");
-    tempJob.setOwner(new UserModel(4,"Körmendi Szilvia",Role.User));
-    tempJob.setCreatedDate(new Date());
 
-    this.newJobs.push(tempJob);
-    tempJob = new JobModel();
-    tempJob.setId(2);
-    tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
-    tempJob.setTitle("Elromlott Szenvedély WC");
-    tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
-    tempJob.setCreatedDate(new Date());
-
-    this.newJobs.push(tempJob);  
-    tempJob = new JobModel();
-    tempJob.setId(3);
-    tempJob.setDescription("Elromlott az földsznit 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
-    tempJob.setTitle("Elromlott Földszint TV");
-    tempJob.setOwner(new UserModel(7,"Stuller Istvánné",Role.User));
-    tempJob.setCreatedDate(new Date());
-
-    this.newJobs.push(tempJob);
-    tempJob = new JobModel();
-    tempJob.setId(4);
-    tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
-    tempJob.setTitle("Elromlott Szenvedély TV");
-    tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
-    tempJob.setCreatedDate(new Date());
-    this.newJobs.push(tempJob);  
-  }
-  getNewJobs():Observable<any>{
+  getNewJobs():Observable<JobModel[]>{
  
   return of(this.newJobs).pipe(delay(100));
 

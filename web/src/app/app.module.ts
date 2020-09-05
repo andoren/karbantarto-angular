@@ -19,6 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ModifyjobComponent } from './components/modifyjob/modifyjob.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NavbarComponent,
     FooterComponent,
     AddjobComponent,
-    NewjobComponent
+    NewjobComponent,
+    ModifyjobComponent
     
   ],
   imports: [

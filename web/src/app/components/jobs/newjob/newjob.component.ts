@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
 import { JobModel } from 'src/app/Models/JobModel';
 import { AuthguardService } from 'src/app/services/authguard.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newjob',
@@ -11,7 +12,7 @@ export class NewjobComponent implements OnInit {
 
   @Input() job:JobModel
 
-  constructor(public authGuard:AuthguardService) {
+  constructor(public authGuard:AuthguardService, private router:Router) {
     
    }
 
@@ -30,5 +31,7 @@ export class NewjobComponent implements OnInit {
   checkNeededForTheJob():boolean{
     return this.job.getWorker() && this.job.getProceedDate() != undefined ;
   }
-  
+  goToModifyJobPage():void{
+    this.router.navigate([`munkamodositas/${this.job.getId()}`]);
+  }
 }

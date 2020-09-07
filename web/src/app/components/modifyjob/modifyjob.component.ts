@@ -37,6 +37,8 @@ export class ModifyjobComponent implements OnInit {
   ngOnInit(): void {
   }
   modifyJob():void{
-
+    this.job.setDescription(this.descriptionFormControl.value);
+    this.job.setTitle(this.titleFormControl.value);
+    this.jobService.modifyJob(this.job);
   }
 }

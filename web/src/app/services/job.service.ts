@@ -109,8 +109,16 @@ export class JobService {
   }
   getJobById(id:Number):Observable<JobModel>{
     let returnJob:JobModel;
-    returnJob = this.newJobs.find(job=>{job.getId() == id});
+    returnJob = this.newJobs.find(job=>{return job.getId() == id});
     return of(returnJob).pipe(delay(100));
-
   }
+  modifyJob(mJob:JobModel){
+    this.newJobs = this.newJobs.filter((job)=>{
+      return  job.getId() != mJob.getId()
+    });
+
+    this.newJobs.push(mJob);
+    this.router.navigate([""]);
+  }
+
 }

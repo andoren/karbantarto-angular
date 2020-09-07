@@ -15,7 +15,7 @@ export class JobService {
   newJobs:JobModel[]=[];
   constructor(private authGuard:AuthguardService,private router:Router) { 
   }
-
+  newJobid:number = 0;
   getNewJobs():Observable<JobModel[]>{
  
   return of(this.newJobs).pipe(delay(100));
@@ -100,9 +100,17 @@ export class JobService {
   return of(jobs).pipe(delay(100));
   }
   addJob(job:JobModel){
+    this.newJobid = this.newJobid + 1;
+    job.setId(this.newJobid);
     job.setOwner(this.authGuard.getLoggedInUser());
     job.setCreatedDate(new Date());
     this.newJobs.push(job);
     this.router.navigate([""]);
+  }
+  getJobById(id:Number):Observable<JobModel>{
+    let returnJob:JobModel;
+    returnJob = this.newJobs.find(job=>{job.getId() == id});
+    return of(returnJob).pipe(delay(100));
+
   }
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { JobModel } from 'src/app/Models/JobModel';
+import { JobService } from 'src/app/services/job.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modifyjob',
@@ -6,10 +10,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modifyjob.component.css']
 })
 export class ModifyjobComponent implements OnInit {
-
-  constructor() { }
+  titleFormControl:FormControl;
+  descriptionFormControl:FormControl;
+  options: FormGroup;
+ JobTitle:String = "";
+  JobDescription:String = "";
+  job:JobModel;
+  constructor(private jobService:JobService, private route:ActivatedRoute) {
+    let id:Number;
+    id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+    this.jobService.getJobById(id).subscribe((job)=>{
+      this.job = job;
+    });
+    this.titleFormControl = new FormControl(this.JobTitle, [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(100)
+    ]);
+    this.descriptionFormControl = new FormControl(this.JobDescription, [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(1000)
+    ]);
+   }
 
   ngOnInit(): void {
   }
+  modifyJob():void{
 
+  }
 }

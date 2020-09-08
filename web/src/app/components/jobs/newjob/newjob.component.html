@@ -13,7 +13,7 @@
             <button *ngIf="authGuard.isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
             <button  *ngIf="authGuard.jobIsMine(job)" (click)="goToModifyJobPage()"  mat-raised-button color="primary">Módosítás</button>
             &nbsp;
-            <button *ngIf="authGuard.jobIsMine(job)" mat-raised-button color="warn">Törlés</button>    
+            <button *ngIf="authGuard.jobIsMine(job)" (click)="onDeleteJob()" mat-raised-button color="warn">Törlés</button>    
          </div>         
          <div *ngIf="inProgressJob()" >
             <div style="width:100%; display:float">

@@ -10,7 +10,7 @@
             </mat-card-header>
             <div *ngIf="newJobs.length != 0; else elseBlock">
                 <mat-card-content  *ngFor="let job of newJobs">
-                    <app-newjob [job]=job></app-newjob>
+                    <app-newjob (deleteJob)="onDeleteJob($event)" [job]=job></app-newjob>
                    
                 </mat-card-content>
             </div>

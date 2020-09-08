@@ -14,13 +14,25 @@ import { Router } from '@angular/router';
 export class JobService {
   newJobs:JobModel[]=[];
   constructor(private authGuard:AuthguardService,private router:Router) { 
+    console.log("JobService created! ");
   }
   newJobid:number = 0;
   getNewJobs():Observable<JobModel[]>{
- 
+    let tempJob:JobModel;
+    tempJob = new JobModel();
+
+    tempJob.setId(4);
+    tempJob.setDescription("Elromlott az Demens 123-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
+    tempJob.setTitle("Elromlott Szenvedély TV");
+    tempJob.setOwner(new UserModel(4,"Körmendi Szilvia",Role.User));
+
+
+    tempJob.setCreatedDate(new Date());
+
+    this.newJobs.push(tempJob);
   return of(this.newJobs).pipe(delay(100));
 
-}
+  }
   getInProgressJobs():Observable<any>{
  
       let jobs:JobModel[] = [];
@@ -99,7 +111,7 @@ export class JobService {
     jobs.push(tempJob);  
   return of(jobs).pipe(delay(100));
   }
-  addJob(job:JobModel){
+  addJob(job:JobModel):void{
     this.newJobid = this.newJobid + 1;
     job.setId(this.newJobid);
     job.setOwner(this.authGuard.getLoggedInUser());
@@ -112,7 +124,7 @@ export class JobService {
     returnJob = this.newJobs.find(job=>{return job.getId() == id});
     return of(returnJob).pipe(delay(100));
   }
-  modifyJob(mJob:JobModel){
+  modifyJob(mJob:JobModel):void{
     this.newJobs = this.newJobs.filter((job)=>{
       return  job.getId() != mJob.getId()
     });
@@ -120,5 +132,11 @@ export class JobService {
     this.newJobs.push(mJob);
     this.router.navigate([""]);
   }
-
+  deleteJob(dJob:JobModel):Observable<any>{
+    this.newJobs = this.newJobs.filter((job)=>{
+      console.log(job.getId() != dJob.getId());
+      return  job.getId() != dJob.getId();
+    });
+    return of({success:true}).pipe(delay(100));
+  }
 }

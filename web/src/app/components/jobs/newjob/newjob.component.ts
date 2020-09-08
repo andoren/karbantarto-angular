@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, Output, EventEmitter } from '@angular/core';
 import { JobModel } from 'src/app/Models/JobModel';
 import { AuthguardService } from 'src/app/services/authguard.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class NewjobComponent implements OnInit {
 
   @Input() job:JobModel
-
+  @Output() deleteJob:EventEmitter<JobModel> = new EventEmitter<JobModel>();
   constructor(public authGuard:AuthguardService, private router:Router) {
     
    }
@@ -33,5 +33,10 @@ export class NewjobComponent implements OnInit {
   }
   goToModifyJobPage():void{
     this.router.navigate([`munkamodositas/${this.job.getId()}`]);
+  }
+  onDeleteJob():void{
+    console.log("in new job start to emit");
+    this.deleteJob.emit(this.job);
+    console.log("in new job emit ended");
   }
 }

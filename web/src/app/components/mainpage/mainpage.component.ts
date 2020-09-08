@@ -28,10 +28,7 @@ export class MainpageComponent implements OnInit {
    
       this.inProgressJobs = jobs;
     });
-    this.jobService.getNewJobs().subscribe((jobs)=>{
-     
-      this.newJobs = jobs;
-    });
+    this.getNewJobs();
     this.jobService.getCurrentMonthDoneJobs().subscribe((jobs)=>{
      
       this.currentMonthJobs = jobs;
@@ -44,5 +41,19 @@ export class MainpageComponent implements OnInit {
   addJob(){
   
     this.router.navigate(["ujmunka"]);
+  }
+  onDeleteJob(job:JobModel){
+    console.log("emit catched in mainpage");
+    this.jobService.deleteJob(job).subscribe(result=>{
+     
+      if(result.success == true) this.getNewJobs();
+    });
+  
+  }
+  getNewJobs():void{
+    this.jobService.getNewJobs().subscribe((jobs)=>{
+     
+      this.newJobs = jobs;
+    });
   }
 }

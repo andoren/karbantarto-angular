@@ -35,8 +35,8 @@ export class NewjobComponent implements OnInit {
     this.router.navigate([`munkamodositas/${this.job.getId()}`]);
   }
   onDeleteJob():void{
-    console.log("in new job start to emit");
+
     this.deleteJob.emit(this.job);
-    console.log("in new job emit ended");
+
   }
 }

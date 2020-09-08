@@ -43,7 +43,7 @@ export class MainpageComponent implements OnInit {
     this.router.navigate(["ujmunka"]);
   }
   onDeleteJob(job:JobModel){
-    console.log("emit catched in mainpage");
+
     this.jobService.deleteJob(job).subscribe(result=>{
      
       if(result.success == true) this.getNewJobs();

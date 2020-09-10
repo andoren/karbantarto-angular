@@ -17,11 +17,7 @@ export class ModifyjobComponent implements OnInit {
   JobDescription:String = "";
   job:JobModel;
   constructor(private jobService:JobService, private route:ActivatedRoute) {
-    let id:Number;
-    id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-    this.jobService.getJobById(id).subscribe((job)=>{
-      this.job = job;
-    });
+
     this.titleFormControl = new FormControl(this.JobTitle, [
       Validators.required,
       Validators.minLength(10),
@@ -32,6 +28,14 @@ export class ModifyjobComponent implements OnInit {
       Validators.minLength(10),
       Validators.maxLength(1000)
     ]);
+    let id:Number;
+    id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+    this.jobService.getJobById(id).subscribe((job)=>{
+      this.job = job;
+      this.titleFormControl.setValue(this.job.getTitle());
+      this.descriptionFormControl.setValue(this.job.getDescription());
+    });
+
    }
 
   ngOnInit(): void {

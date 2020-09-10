@@ -10,7 +10,7 @@
             </mat-card-header>
             <div *ngIf="newJobs.length != 0; else elseBlock">
                 <mat-card-content  *ngFor="let job of newJobs">
-                    <app-newjob (deleteJob)="onDeleteJob($event)" [job]=job></app-newjob>
+                    <app-newjob (claimIt)="onIClaimIt($event)"  (deleteJob)="onDeleteJob($event)" [job]=job></app-newjob>
                    
                 </mat-card-content>
             </div>
@@ -29,7 +29,7 @@
             <div *ngIf="inProgressJobs.length != 0; else elseBlock">
                 <mat-card-content  *ngFor="let job of inProgressJobs">
                    
-                        <app-newjob [job]=job></app-newjob>
+                        <app-newjob (jobToBeChecked)="onJobToBeChecked($event)" [job]=job></app-newjob>
                        
                    
                 </mat-card-content>
@@ -49,7 +49,7 @@
         </mat-card-header>
         <div *ngIf="checkNeededJobs.length != 0; else elseBlock">
             <mat-card-content  *ngFor="let job of checkNeededJobs">
-                <app-newjob [job]=job></app-newjob>
+                <app-newjob  [job]=job></app-newjob>
                 
             </mat-card-content>
         </div>

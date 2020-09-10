@@ -10,7 +10,7 @@
                 <p ><b>Beíró:</b> {{job.getOwner().getFullname()}}  <br/> <b>Feltéve:</b> {{job.getCreatedDate() | date:'yyyy-MM-dd'}}</p>
                
             </div>    
-            <button *ngIf="authGuard.isUserJanitor()" mat-raised-button color="primary">Elválalom</button>
+            <button *ngIf="authGuard.isUserJanitor()" (click)="onIClaimIt()" mat-raised-button color="primary">Elválalom</button>
             <button  *ngIf="authGuard.jobIsMine(job)" (click)="goToModifyJobPage()"  mat-raised-button color="primary">Módosítás</button>
             &nbsp;
             <button *ngIf="authGuard.jobIsMine(job)" (click)="onDeleteJob()" mat-raised-button color="warn">Törlés</button>    
@@ -21,7 +21,7 @@
                 <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job.getWorker().getFullname()}}</p>
                 <p class="clearfix"></p>
             </div>    
-            <button *ngIf="authGuard.iStartedTheJob(job)" mat-raised-button color="primary">Kész</button>  
+            <button *ngIf="authGuard.iStartedTheJob(job)" (click)="onJobToBeChecked()" mat-raised-button color="primary">Kész</button>  
          </div> 
      
         <div *ngIf="checkNeededForTheJob()">

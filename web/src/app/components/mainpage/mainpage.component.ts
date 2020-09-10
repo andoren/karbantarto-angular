@@ -56,4 +56,19 @@ export class MainpageComponent implements OnInit {
       this.newJobs = jobs;
     });
   }
+  onIClaimIt(job:JobModel):void{
+    this.jobService.claimAJob(job).subscribe((result)=>{
+        if(result.success){
+
+        }
+    });
+  }
+  onJobToBeChecked(job:JobModel):void{
+   
+    this.jobService.setJobToBeChecked(job).subscribe((result)=>{
+      if(result.success){
+
+      }
+  });
+  }
 }

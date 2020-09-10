@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class JobService {
   newJobs:JobModel[]=[];
+  inProgressJobs:JobModel[]=[];
+  unCheckedJobs:JobModel[] = [];
   constructor(private authGuard:AuthguardService,private router:Router) { 
     console.log("JobService created! ");
   }
@@ -33,9 +35,8 @@ export class JobService {
   return of(this.newJobs).pipe(delay(100));
 
   }
-  getInProgressJobs():Observable<any>{
+  getInProgressJobs():Observable<JobModel[]>{
  
-      let jobs:JobModel[] = [];
       let tempJob:JobModel;
       tempJob = new JobModel();
       tempJob.setId(4);
@@ -43,20 +44,10 @@ export class JobService {
       tempJob.setTitle("Elromlott Szenvedély TV");
       tempJob.setOwner(new UserModel(4,"Körmendi Szilvia",Role.User));
       tempJob.setWorker(new UserModel(5,"Sárkány János",Role.Janitor));
-
       tempJob.setCreatedDate(new Date());
-  
-      jobs.push(tempJob);
-      tempJob = new JobModel();
-      tempJob.setId(5);
-      tempJob.setDescription("Elromlott az 4-es épület 1230-as szobábana wc lehúzójának a kiscicájának az izébizéje.");
-      tempJob.setTitle("Elromlott Szenvedély TV");
-      tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
-      tempJob.setWorker(new UserModel(3,"id.Pekár Mihály",Role.Janitor));
-      tempJob.setCreatedDate(new Date());
-
-      jobs.push(tempJob);  
-    return of(jobs).pipe(delay(100));
+      this.inProgressJobs.push(tempJob);
+     
+    return of(this.inProgressJobs).pipe(delay(100));
 
   }
   getCurrentMonthDoneJobs():Observable<any>{
@@ -87,7 +78,6 @@ export class JobService {
 
 }
   getNeedToCheckJobs():Observable<any>{
-    let jobs:JobModel[] = [];
     let tempJob:JobModel;
     tempJob = new JobModel();
     tempJob.setId(14);
@@ -97,19 +87,8 @@ export class JobService {
     tempJob.setWorker(new UserModel(3,"id. Pekár Mihály",Role.Janitor));
     tempJob.setProceedDate(new Date());
     tempJob.setCreatedDate(new Date());
-
-    jobs.push(tempJob);
-    tempJob = new JobModel();
-    tempJob.setId(10); 
-    tempJob.setDescription("Elromlott a MitoménMito ménMitoménMi toménMitoménMitoménM itomén MitoménMitoménMitoménMitomén ");
-    tempJob.setTitle("Elromlott Szenvedély Mitomén");
-    tempJob.setOwner(new UserModel(6,"Litauszki János",Role.User));
-    tempJob.setWorker(new UserModel(5,"Sárkány János",Role.Janitor));
-    tempJob.setProceedDate(new Date());
-    tempJob.setCreatedDate(new Date());
-
-    jobs.push(tempJob);  
-  return of(jobs).pipe(delay(100));
+    this.unCheckedJobs.push(tempJob)
+  return of(this.unCheckedJobs).pipe(delay(100));
   }
   addJob(job:JobModel):void{
     this.newJobid = this.newJobid + 1;
@@ -133,10 +112,37 @@ export class JobService {
     this.router.navigate([""]);
   }
   deleteJob(dJob:JobModel):Observable<any>{
-    this.newJobs = this.newJobs.filter((job)=>{
-      console.log(job.getId() != dJob.getId());
-      return  job.getId() != dJob.getId();
-    });
+    const index: number = this.newJobs.indexOf(dJob);
+    if (index !== -1) {
+      this.newJobs.splice(index, 1);
+    }else{
+      return of({success:false}).pipe(delay(100));
+    }     
+    return of({success:true}).pipe(delay(100));
+  }
+  claimAJob(cJob:JobModel):Observable<any>{
+    const index: number = this.newJobs.indexOf(cJob);
+    if (index !== -1) {
+      this.newJobs.splice(index, 1);
+      cJob.setWorker(this.authGuard.getLoggedInUser());
+      this.inProgressJobs.push(cJob);
+    } 
+    else {
+      return of({success:false}).pipe(delay(100));
+    }
+    return of({success:true}).pipe(delay(100));
+  }
+  setJobToBeChecked(dJob:JobModel):Observable<any>{
+    const index: number = this.inProgressJobs.indexOf(dJob);
+    console.log(dJob);
+    if (index !== -1) {
+      this.inProgressJobs.splice(index, 1);
+      dJob.setProceedDate(new Date());
+      this.unCheckedJobs.push(dJob);
+    } 
+    else {
+      return of({success:false}).pipe(delay(100));
+    }
     return of({success:true}).pipe(delay(100));
   }
 }

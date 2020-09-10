@@ -14,6 +14,8 @@ export class NewjobComponent implements OnInit {
   @Output() deleteJob:EventEmitter<JobModel> = new EventEmitter<JobModel>();
   @Output() claimIt:EventEmitter<JobModel> = new EventEmitter<JobModel>();
   @Output() jobToBeChecked:EventEmitter<JobModel> = new EventEmitter<JobModel>();
+  @Output() jobIsWrong:EventEmitter<JobModel> = new EventEmitter<JobModel>();
+  @Output() jobIsDone:EventEmitter<JobModel> = new EventEmitter<JobModel>();
   constructor(public authGuard:AuthguardService, private router:Router) {
     
    }
@@ -45,5 +47,12 @@ export class NewjobComponent implements OnInit {
   onJobToBeChecked():void{
 
     this.jobToBeChecked.emit(this.job);
+  }
+  onJobIsDone():void{
+ 
+    this.jobIsDone.emit(this.job);
+  }
+  onJobIsWrong():void{
+    this.jobIsWrong.emit(this.job);
   }
 }

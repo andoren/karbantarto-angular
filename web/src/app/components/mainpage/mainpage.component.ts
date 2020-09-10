@@ -71,4 +71,19 @@ export class MainpageComponent implements OnInit {
       }
   });
   }
+  onJobDone(job:JobModel):void{
+    this.jobService.setJobDone(job).subscribe((result)=>{
+
+      if(result.success){
+
+      }
+    });
+  }
+  onJobIsWrong(job:JobModel):void{
+    this.jobService.setJobWrong(job).subscribe((result)=>{
+      if(result.success){
+
+      }
+    });
+  }
 }

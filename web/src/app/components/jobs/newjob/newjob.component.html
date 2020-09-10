@@ -30,10 +30,10 @@
                 <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job.getWorker().getFullname()}} <br/>  <b>Feladat elkészítve:</b> {{job.getProceedDate() | date:'yyyy-MM-dd'}}</p>
                 <p class="clearfix"></p>
             </div>     
-            <div *ngIf="authGuard.jobIsMine(job)">
-                <button  mat-raised-button color="primary" >Hitelesít</button>
+            <div *ngIf="authGuard.jobIsMine(job) && !job.getIsDone()">
+                <button  mat-raised-button color="primary" (click)="onJobIsDone()" >Hitelesít</button>
                 &nbsp;
-                <button mat-raised-button color="warn">Visszadob</button>
+                <button mat-raised-button color="warn" (click)="onJobIsWrong()">Visszadob</button>
             </div>
         </div>   
 

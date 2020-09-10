@@ -15,6 +15,7 @@ export class JobService {
   newJobs:JobModel[]=[];
   inProgressJobs:JobModel[]=[];
   unCheckedJobs:JobModel[] = [];
+  currentMonthJobs:JobModel[] = [];
   constructor(private authGuard:AuthguardService,private router:Router) { 
     console.log("JobService created! ");
   }
@@ -52,18 +53,7 @@ export class JobService {
   }
   getCurrentMonthDoneJobs():Observable<any>{
  
-    let jobs:JobModel[] = [];
     let tempJob:JobModel;
-    tempJob = new JobModel();
-    tempJob.setId(14);
-    tempJob.setDescription("Szerver terem évek óta beázik ezért salétromos lett a fal. Ennek a hibának a kiküszöbölésére van szükség. Utána a szerver terem meszelésére is.");
-    tempJob.setTitle("A szerver terem beázás");
-    tempJob.setOwner(new UserModel(1,"Pekár Mihály",Role.Admin));
-    tempJob.setWorker(new UserModel(3,"id. Pekár Mihály",Role.Janitor));
-    tempJob.setProceedDate(new Date());
-    tempJob.setCreatedDate(new Date());
-    tempJob.setDoneDate(new Date());
-    jobs.push(tempJob);
     tempJob = new JobModel();
     tempJob.setId(10);
     tempJob.setDescription("Elromlott az 4-es épület 1230-as szobában a tv ");
@@ -73,8 +63,8 @@ export class JobService {
     tempJob.setProceedDate(new Date());
     tempJob.setCreatedDate(new Date());
     tempJob.setDoneDate(new Date());
-    jobs.push(tempJob);  
-  return of(jobs).pipe(delay(100));
+    this.currentMonthJobs.push(tempJob);  
+  return of(this.currentMonthJobs).pipe(delay(100));
 
 }
   getNeedToCheckJobs():Observable<any>{
@@ -134,7 +124,6 @@ export class JobService {
   }
   setJobToBeChecked(dJob:JobModel):Observable<any>{
     const index: number = this.inProgressJobs.indexOf(dJob);
-    console.log(dJob);
     if (index !== -1) {
       this.inProgressJobs.splice(index, 1);
       dJob.setProceedDate(new Date());
@@ -145,4 +134,35 @@ export class JobService {
     }
     return of({success:true}).pipe(delay(100));
   }
+  setJobDone(dJob:JobModel):Observable<any>{
+    const index: number = this.unCheckedJobs.indexOf(dJob);
+
+    if (index !== -1) {
+   
+      this.unCheckedJobs.splice(index, 1);
+      dJob.setDoneDate(new Date());
+      dJob.setIsDone(true);
+      this.currentMonthJobs.push(dJob);
+    } 
+    else {
+      return of({success:false}).pipe(delay(100));
+    }
+    return of({success:true}).pipe(delay(100));
+  }
+  setJobWrong(dJob:JobModel):Observable<any>{
+  
+    const index: number = this.unCheckedJobs.indexOf(dJob);
+    if (index !== -1) {
+      this.unCheckedJobs.splice(index, 1);
+      dJob.setWorker(null);
+      dJob.setProceedDate(null);
+      this.newJobs.push(dJob);
+
+    } 
+    else {
+      return of({success:false}).pipe(delay(100));
+    }
+    return of({success:true}).pipe(delay(100));
+  }
+  
 }

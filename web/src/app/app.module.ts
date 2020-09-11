@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModifyjobComponent } from './components/modifyjob/modifyjob.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { ModifyjobComponent } from './components/modifyjob/modifyjob.component';
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
     
   ],
   providers: [],

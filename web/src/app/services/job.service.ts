@@ -8,6 +8,7 @@ import { delay } from 'rxjs/operators';
 import { Role } from '../Models/role.enum';
 import { AuthguardService } from './authguard.service';
 import { Router } from '@angular/router';
+import {SnackBarService} from '../services/snack-bar.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class JobService {
   inProgressJobs:JobModel[]=[];
   unCheckedJobs:JobModel[] = [];
   currentMonthJobs:JobModel[] = [];
-  constructor(private authGuard:AuthguardService,private router:Router) { 
+  constructor(private authGuard:AuthguardService,private router:Router, private snackService:SnackBarService) { 
     console.log("JobService created! ");
   }
   newJobid:number = 0;
@@ -87,6 +88,7 @@ export class JobService {
     job.setCreatedDate(new Date());
     this.newJobs.push(job);
     this.router.navigate([""]);
+    this.snackService.openSnackBar("Sikeres munka hozzáadás.","Munka");
   }
   getJobById(id:Number):Observable<JobModel>{
     let returnJob:JobModel;

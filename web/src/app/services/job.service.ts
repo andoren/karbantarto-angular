@@ -88,7 +88,7 @@ export class JobService {
     job.setCreatedDate(new Date());
     this.newJobs.push(job);
     this.router.navigate([""]);
-    this.snackService.openErrorSnackBar("Sikeres munka hozzáadás.","Munka");
+
   }
   getJobById(id:Number):Observable<JobModel>{
     let returnJob:JobModel;
@@ -99,7 +99,7 @@ export class JobService {
     this.newJobs = this.newJobs.filter((job)=>{
       return  job.getId() != mJob.getId()
     });
-
+  
     this.newJobs.push(mJob);
     this.router.navigate([""]);
   }
@@ -107,9 +107,11 @@ export class JobService {
     const index: number = this.newJobs.indexOf(dJob);
     if (index !== -1) {
       this.newJobs.splice(index, 1);
+      
     }else{
       return of({success:false}).pipe(delay(100));
-    }     
+    } 
+ 
     return of({success:true}).pipe(delay(100));
   }
   claimAJob(cJob:JobModel):Observable<any>{
@@ -118,6 +120,7 @@ export class JobService {
       this.newJobs.splice(index, 1);
       cJob.setWorker(this.authGuard.getLoggedInUser());
       this.inProgressJobs.push(cJob);
+  
     } 
     else {
       return of({success:false}).pipe(delay(100));
@@ -130,6 +133,7 @@ export class JobService {
       this.inProgressJobs.splice(index, 1);
       dJob.setProceedDate(new Date());
       this.unCheckedJobs.push(dJob);
+  ;
     } 
     else {
       return of({success:false}).pipe(delay(100));
@@ -138,13 +142,12 @@ export class JobService {
   }
   setJobDone(dJob:JobModel):Observable<any>{
     const index: number = this.unCheckedJobs.indexOf(dJob);
-
     if (index !== -1) {
-   
       this.unCheckedJobs.splice(index, 1);
       dJob.setDoneDate(new Date());
       dJob.setIsDone(true);
       this.currentMonthJobs.push(dJob);
+
     } 
     else {
       return of({success:false}).pipe(delay(100));

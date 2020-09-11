@@ -27,15 +27,21 @@ export class MainpageComponent implements OnInit {
     this.jobService.getInProgressJobs().subscribe((jobs)=>{
    
       this.inProgressJobs = jobs;
+    },error=>{
+      this.snackService.openErrorSnackBar("Hiba a folyamatban lévő munkák lekérése közben.","Lekérés");
     });
     this.getNewJobs();
     this.jobService.getCurrentMonthDoneJobs().subscribe((jobs)=>{
      
       this.currentMonthJobs = jobs;
+    },error=>{
+      this.snackService.openErrorSnackBar("Hiba a havi munkák lekérése közben","Munka");
     });
     this.jobService.getNeedToCheckJobs().subscribe((jobs)=>{
      
       this.checkNeededJobs = jobs;
+    },error=>{
+      this.snackService.openErrorSnackBar("Hiba a ellenőrizendő munkák letöltése közben.","Munka");
     });
   }
   addJob(){
@@ -63,36 +69,45 @@ export class MainpageComponent implements OnInit {
     this.jobService.getNewJobs().subscribe((jobs)=>{
      
       this.newJobs = jobs;
+    },error=>{
+      this.snackService.openErrorSnackBar("Hiba az új munkák lekérése közben.","Lekérés");
     });
   }
   onIClaimIt(job:JobModel):void{
     this.jobService.claimAJob(job).subscribe((result)=>{
         if(result.success){
-
+          this.snackService.openInformationSnackBar("Sikeresen elválata a munkát.","Munka");
         }
+    },error=>{
+        this.snackService.openInformationSnackBar("Hiba a munka elválalása közben. Keresse meg a rendszergazdát!","Munka");
     });
   }
   onJobToBeChecked(job:JobModel):void{
    
     this.jobService.setJobToBeChecked(job).subscribe((result)=>{
       if(result.success){
-
+        this.snackService.openInformationSnackBar("Sikeresen leadta a munkát.","Munka");
       }
+  },error=>{
+      this.snackService.openInformationSnackBar("Hiba a munka leadása közben. Keresse meg a rendszergazdát!","Munka");
   });
   }
   onJobDone(job:JobModel):void{
     this.jobService.setJobDone(job).subscribe((result)=>{
-
       if(result.success){
-
+        this.snackService.openInformationSnackBar("A munkát sikeresen késznek jelölte!","Munka");
       }
-    });
+  },error=>{
+      this.snackService.openInformationSnackBar("Hiba a munka késznek nyilvánítása közben. Keresse meg a rendszergazdát!","Munka");
+  });
   }
   onJobIsWrong(job:JobModel):void{
     this.jobService.setJobWrong(job).subscribe((result)=>{
       if(result.success){
-
+        this.snackService.openInformationSnackBar("A elutasította. Vissza került az új munkák közé! Ott tudja módosítani a hiba leírását.","Munka");
       }
-    });
+  },error=>{
+      this.snackService.openInformationSnackBar("Hiba a munka elutasítása közben. Keresse meg a rendszergazdát!","Munka");
+  });
   }
 }

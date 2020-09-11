@@ -88,7 +88,7 @@ export class JobService {
     job.setCreatedDate(new Date());
     this.newJobs.push(job);
     this.router.navigate([""]);
-    this.snackService.openSnackBar("Sikeres munka hozzáadás.","Munka");
+    this.snackService.openErrorSnackBar("Sikeres munka hozzáadás.","Munka");
   }
   getJobById(id:Number):Observable<JobModel>{
     let returnJob:JobModel;

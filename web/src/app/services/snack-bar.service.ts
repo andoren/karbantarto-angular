@@ -8,9 +8,16 @@ export class SnackBarService {
 
   constructor(private _snackBar: MatSnackBar) {}
 
-  openSnackBar(message: string, action: string) {
+  openInformationSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 3000,
+      panelClass: ['mat-toolbar', 'mat-primary']
+    });
+  }
+  openErrorSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['mat-toolbar', 'mat-warn']
     });
   }
 }

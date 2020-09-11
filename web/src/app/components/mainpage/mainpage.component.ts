@@ -2,8 +2,8 @@ import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import {JobModel} from '../../Models/JobModel';
 import { AuthguardService } from 'src/app/services/authguard.service';
 import {JobService} from '../../services/job.service';
-import { Role } from 'src/app/Models/role.enum';
 import { Router } from '@angular/router';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -17,7 +17,7 @@ export class MainpageComponent implements OnInit {
   newJobs:JobModel[] = [];
   currentMonthJobs:JobModel[]=[];
   checkNeededJobs:JobModel[]=[];
-  constructor(public authGuard:AuthguardService, private jobService:JobService, private router:Router) {
+  constructor(public authGuard:AuthguardService, private jobService:JobService, private router:Router, private snackService:SnackBarService) {
     this.generateTempData()
    }
 
@@ -46,7 +46,16 @@ export class MainpageComponent implements OnInit {
 
     this.jobService.deleteJob(job).subscribe(result=>{
      
-      if(result.success == true) this.getNewJobs();
+      if(result.success == true){
+        this.getNewJobs();
+        this.snackService.openInformationSnackBar("Sikeresen törölte a munkát!.","Munka");
+      } else{
+        this.snackService.openInformationSnackBar("A munkát nem sikerült törölni.","Munka");
+      }
+    },error=>{
+      if(error){
+        this.snackService.openErrorSnackBar("A munkát nem sikerült törölni.","Munka");
+      }
     });
   
   }

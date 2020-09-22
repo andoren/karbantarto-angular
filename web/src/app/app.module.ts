@@ -23,6 +23,7 @@ import { ModifyjobComponent } from './components/modifyjob/modifyjob.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthguardService } from './services/authguard.service';
 import {HttpClientModule} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule
     
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

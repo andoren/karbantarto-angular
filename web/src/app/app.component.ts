@@ -12,6 +12,6 @@ export class AppComponent {
 
   }
   userIsLoggedIn():boolean{
-    return this.authGuard.isLoggedIn;
+    return this.authGuard.getLoggedInUser() != null;
   }
 }

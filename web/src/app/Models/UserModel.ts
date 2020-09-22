@@ -1,3 +1,4 @@
+import { tokenName } from '@angular/compiler';
 import { Role } from './role.enum';
 
 export class UserModel{
@@ -6,26 +7,34 @@ export class UserModel{
         this.setId(id);
         this.setFullname(fullname);
         this.setRole(role);
+      
     }
-    private _fullname:String;
-    private _role:Role;
-    private _id:Number;
+    private fullname:String;
+    private role:Role;
+    private id:Number;
+    private token:String;
     getFullname():String{
-        return this._fullname;
+        return this.fullname;
     }
     setFullname(fullname:String):void{
-        this._fullname = fullname;
+        this.fullname = fullname;
     }
     getRole():Role{
-        return this._role;
+        return this.role;
     }
     setRole(role:Role):void{
-        this._role = role;
+        this.role = role;
     }
     getId():Number{
-        return this._id;
+        return this.id;
     }
     setId(id:Number):void{
-        this._id = id;
+        this.id = id;
+    }
+    getToken():String{
+        return this.token;
+    }
+    setToken(token:String):void{
+        this.token = token;
     }
 }

@@ -18,10 +18,11 @@ export class MainpageComponent implements OnInit {
   currentMonthJobs:JobModel[]=[];
   checkNeededJobs:JobModel[]=[];
   constructor(public authGuard:AuthguardService, private jobService:JobService, private router:Router, private snackService:SnackBarService) {
-    this.generateTempData()
+    
    }
 
   ngOnInit(): void {
+    this.generateTempData();
   }
   generateTempData():void{
     this.jobService.getInProgressJobs().subscribe((jobs)=>{

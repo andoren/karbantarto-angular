@@ -11,13 +11,13 @@ export class LoggedinguardGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!(this.authGuard.isLoggedIn)){
+      if(!(this.authGuard.getLoggedInUser())){
         this.router.navigate(["bejelentkezes"]);
         return false;
       }
       else return true;
       
-      return ;
+      
   }
   
 }

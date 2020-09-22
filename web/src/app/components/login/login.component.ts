@@ -41,22 +41,24 @@ export class LoginComponent implements OnInit {
       ]),
       password : new FormControl("", [
         Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(8),
         Validators.maxLength(200)
       ])
     });
-    if ( this.authGuard.isLoggedIn) {
+    if ( this.authGuard.getLoggedInUser()) {
        this.router.navigate([this.returnUrl]);
     }
   }
-  async onSubmit() {
+  onSubmit() {
     this.loginInvalid = false;
- 
+    console.log("meow");
     if (this.form.valid) {
       try {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
-        await this.authGuard.login(username, password);
+       this.authGuard.login(username, password).subscribe(user=>{
+        console.log(user);
+       });
       } catch (err) {
         this.loginInvalid = true;
       }

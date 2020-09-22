@@ -18,7 +18,7 @@ export class JobService {
   unCheckedJobs:JobModel[] = [];
   currentMonthJobs:JobModel[] = [];
   constructor(private authGuard:AuthguardService,private router:Router, private snackService:SnackBarService) { 
-    console.log("JobService created! ");
+   
   }
   newJobid:number = 0;
   getNewJobs():Observable<JobModel[]>{

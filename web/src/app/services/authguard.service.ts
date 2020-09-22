@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import{SharedDataModule} from '../Models/shared-data.module';
 import { map } from 'rxjs/operators';
-import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,9 +40,9 @@ export class AuthguardService {
     getLoggedInUser():UserModel{
       try{
         let temp = JSON.parse(this.cookieService.get("user"));
-        let user:UserModel = new UserModel(temp.id,temp.fullname,temp.role);
+        let user:UserModel = new UserModel(temp.id,temp.fullname,Role[temp.role as keyof typeof Role]);
         user.setToken(temp.token);
-        console.log(user);
+     
         return user;
         }catch(error){
            console.log(error);
@@ -60,6 +60,7 @@ export class AuthguardService {
     return this.getLoggedInUser().getId() == job.getWorker().getId();
   }
    userIsAdministrator():boolean{
+
     return this.getLoggedInUser().getRole() == Role.Admin;
   }
 

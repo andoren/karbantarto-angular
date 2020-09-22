@@ -18,7 +18,9 @@ export class AuthguardService {
     this.currentUser = this.currentUserSubject.asObservable();
   
    }
-   
+   login(username:String,password:String):boolean{
+      return false;
+   }
     getLoggedInUser():UserModel{
      return new UserModel(1,"Pekár Mihály",Role.Admin);
       //return new UserModel(6,"Litauszki János",Role.User)

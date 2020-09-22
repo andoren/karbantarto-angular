@@ -22,7 +22,7 @@ export class AddjobComponent implements OnInit {
   ]);
   descriptionFormControl = new FormControl(this.newJobDescription, [
     Validators.required,
-    Validators.minLength(10),
+    Validators.minLength(20),
     Validators.maxLength(1000)
   ]);
   ngOnInit(): void {

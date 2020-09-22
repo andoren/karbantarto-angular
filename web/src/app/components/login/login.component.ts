@@ -4,6 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router  } from '@angular/router';
 import { AuthguardService } from 'src/app/services/authguard.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authGuard:AuthguardService,
     iconRegistry: MatIconRegistry, 
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private snackBar:SnackBarService
   ) {
     iconRegistry.addSvgIcon(
       'build',
@@ -50,17 +52,20 @@ export class LoginComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.loginInvalid = false;
-    console.log("meow");
+ 
     if (this.form.valid) {
       try {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
        this.authGuard.login(username, password).subscribe(user=>{
-        console.log(user);
+         
+        this.snackBar.openInformationSnackBar("Sikeres bejelentkezés","Bejelentkezés");
+       },error=>{
+         console.log(error);
+        this.snackBar.openErrorSnackBar(error.message,"Bejelentkezés");
        });
       } catch (err) {
-        this.loginInvalid = true;
+       
       }
     } 
   }

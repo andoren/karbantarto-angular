@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import{SharedDataModule} from '../Models/shared-data.module';
 import { map } from 'rxjs/operators';
+import { SnackBarService } from './snack-bar.service';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class AuthguardService {
   private currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
 
-  constructor(private cookieService:CookieService,private http:HttpClient, private sharedData:SharedDataModule) {
+  constructor(private cookieService:CookieService,private http:HttpClient, private sharedData:SharedDataModule, private snackBar:SnackBarService) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(this.getLoggedInUser());
     this.currentUser = this.currentUserSubject.asObservable();
   
@@ -27,6 +28,7 @@ export class AuthguardService {
   
     return this.http.post<any>(`${this.sharedData.USER_BASE_URL}/login`,{"username":username,"password":password})
     .pipe(map(loggedInUser => {
+
         let user:UserModel = new UserModel(loggedInUser.id,loggedInUser.fullName,loggedInUser.role);
         user.setToken(loggedInUser.token);
         if(user.getToken() && user.getToken() !== undefined && user.getToken() !== null){
@@ -45,7 +47,7 @@ export class AuthguardService {
      
         return user;
         }catch(error){
-           console.log(error);
+       
            return null;
         }
    

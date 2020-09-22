@@ -24,6 +24,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthguardService } from './services/authguard.service';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
+import { LogoutComponent } from './components/logout/logout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import {CookieService} from 'ngx-cookie-service';
     FooterComponent,
     AddjobComponent,
     NewjobComponent,
-    ModifyjobComponent
+    ModifyjobComponent,
+    LogoutComponent
     
   ],
   imports: [

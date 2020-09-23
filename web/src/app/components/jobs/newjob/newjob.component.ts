@@ -34,6 +34,7 @@ export class NewjobComponent implements OnInit {
     if(this.job == undefined){
       return false;
     }
+ 
     return this.job.worker != null && this.job.proceedDate == null;
   }
   checkNeededForTheJob():boolean{

@@ -6,4 +6,5 @@ export class UserModel{
     role:Role;
     token:String;
     email:String;
+    password:String;
 }

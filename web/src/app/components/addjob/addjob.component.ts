@@ -3,6 +3,9 @@ import { JobModel } from 'src/app/Models/JobModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { JobService } from 'src/app/services/job.service';
+import { AreaModel } from 'src/app/Models/AreaModel';
+import {AreaService} from '../../services/area.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-addjob',
@@ -11,10 +14,12 @@ import { JobService } from 'src/app/services/job.service';
 })
 export class AddjobComponent implements OnInit {
   options: FormGroup;
-  constructor(private jobService:JobService) { }
+  constructor(private jobService:JobService, private areaService:AreaService, private snackBarService:SnackBarService) { }
   newJobTitle:String = "";
   newJobDescription:String = "";
   newJob:JobModel = new JobModel();
+  areas:AreaModel[] = [];
+  selectedArea:AreaModel = new AreaModel() ;
   titleFormControl = new FormControl(this.newJobTitle, [
     Validators.required,
     Validators.minLength(10),
@@ -25,12 +30,20 @@ export class AddjobComponent implements OnInit {
     Validators.minLength(20),
     Validators.maxLength(1000)
   ]);
+  areaFormControl = new FormControl(this.selectedArea);
   ngOnInit(): void {
-
+    this.areaService.getAreaByUserId().subscribe(areas=>{
+      this.areas = areas;
+    },error=>{
+      this.snackBarService.openErrorSnackBar(error.message,"Area letöltési hiba.");
+    });
   }
   addJob():void{
     this.newJob.title = this.titleFormControl.value;
     this.newJob.description = this.descriptionFormControl.value;
-      this.jobService.addJob(this.newJob);
+    this.newJob.area = new AreaModel();
+    Object.assign(this.newJob.area,this.areaFormControl.value);
+
+    this.jobService.addJob(this.newJob);
   }
 }

@@ -50,15 +50,9 @@ export class MainpageComponent implements OnInit {
     this.router.navigate(["ujmunka"]);
   }
   onDeleteJob(job:JobModel){
-
     this.jobService.deleteJob(job).subscribe(result=>{
-     
-      if(result.success == true){
         this.getNewJobs();
         this.snackService.openInformationSnackBar("Sikeresen törölte a munkát!.","Munka");
-      } else{
-        this.snackService.openInformationSnackBar("A munkát nem sikerült törölni.","Munka");
-      }
     },error=>{
       if(error){
         this.snackService.openErrorSnackBar("A munkát nem sikerült törölni.","Munka");
@@ -69,7 +63,6 @@ export class MainpageComponent implements OnInit {
   getNewJobs():void{
     this.jobService.getNewJobs().subscribe((jobs)=>{
       this.newJobs = jobs;
-      console.log(this.newJobs);
     },error=>{
       this.snackService.openErrorSnackBar("Hiba az új munkák lekérése közben.","Lekérés");
     });

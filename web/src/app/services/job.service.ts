@@ -16,90 +16,61 @@ import { SharedDataModule } from '../Models/shared-data.module';
 })
 export class JobService {
   options:any={};
-  newJobs:JobModel[]=[];
-  inProgressJobs:JobModel[]=[];
+
+
   unCheckedJobs:JobModel[] = [];
   currentMonthJobs:JobModel[] = [];
-  constructor(private http:HttpClient,private authGuard:AuthguardService,private router:Router, private shared:SharedDataModule) { 
-   
+  constructor(private http:HttpClient,private authGuard:AuthguardService,private router:Router,
+    private snackBarService:SnackBarService, private shared:SharedDataModule) { 
+  
   }
   newJobid:number = 0;
   getNewJobs():Observable<any>{
     return this.http.get<JobModel[]>(`${this.shared.JOB_BASE_URL}/getnewworks`,this.getHeaderOption());
 
   }
-  getInProgressJobs():Observable<JobModel[]>{
- 
-      let tempJob:JobModel;
-
-      this.inProgressJobs.push(tempJob);
-     
-    return of(this.inProgressJobs).pipe(delay(100));
+  getInProgressJobs():Observable<any>{
+    return this.http.get<JobModel[]>(`${this.shared.JOB_BASE_URL}/getstartedworks`,this.getHeaderOption());
 
   }
   getCurrentMonthDoneJobs():Observable<any>{
- 
-    let tempJob:JobModel;
-  
-    this.currentMonthJobs.push(tempJob);  
-  return of(this.currentMonthJobs).pipe(delay(100));
+    return this.http.get<JobModel[]>(`${this.shared.JOB_BASE_URL}/getdoneworks`,this.getHeaderOption());
 
-}
+  }
   getNeedToCheckJobs():Observable<any>{
-    let tempJob:JobModel;
+    return this.http.get<JobModel[]>(`${this.shared.JOB_BASE_URL}/getneedtocheckworks`,this.getHeaderOption());
 
-    this.unCheckedJobs.push(tempJob)
-  return of(this.unCheckedJobs).pipe(delay(100));
   }
   addJob(job:JobModel):void{
-    this.newJobid = this.newJobid + 1;
+     this.http.post<JobModel[]>(`${this.shared.JOB_BASE_URL}`,job,this.getHeaderOption()).subscribe(()=>{
+      
+      this.snackBarService.openInformationSnackBar("A munka sikeresen hozzáadva.","Munka hozzáadása.");
+      this.router.navigate([""]);
+     },error=>{
+       this.snackBarService.openErrorSnackBar(error.message,"Munka hozzáadása.");
+     });
 
-    this.router.navigate([""]);
 
   }
-  getJobById(id:Number):Observable<JobModel>{
-    let returnJob:JobModel;
-
-    return of(returnJob).pipe(delay(100));
+  getJobById(id:Number):Observable<any>{
+    return this.http.get<JobModel>(`${this.shared.JOB_BASE_URL}/${id}`,this.getHeaderOption());
   }
   modifyJob(mJob:JobModel):void{
-
+    this.http.put(`${this.shared.JOB_BASE_URL}`,mJob,this.getHeaderOption()).subscribe(success=>{
+      this.snackBarService.openInformationSnackBar("Sikeresen módosította a munkát.","Módosítási hiba")
+    },error=>{
+      this.snackBarService.openErrorSnackBar(error,"Módosítási hiba");
+    });
   }
   deleteJob(dJob:JobModel):Observable<any>{
-    const index: number = this.newJobs.indexOf(dJob);
-    if (index !== -1) {
-      this.newJobs.splice(index, 1);
-      
-    }else{
-      return of({success:false}).pipe(delay(100));
-    } 
- 
-    return of({success:true}).pipe(delay(100));
+      return this.http.delete(`${this.shared.JOB_BASE_URL}/${dJob.id}`,this.getHeaderOption());
   }
   claimAJob(cJob:JobModel):Observable<any>{
-    const index: number = this.newJobs.indexOf(cJob);
-    if (index !== -1) {
-      this.newJobs.splice(index, 1);
-      cJob.worker = this.authGuard.getLoggedInUser();
-      this.inProgressJobs.push(cJob);
-  
-    } 
-    else {
-      return of({success:false}).pipe(delay(100));
-    }
+
     return of({success:true}).pipe(delay(100));
   }
   setJobToBeChecked(dJob:JobModel):Observable<any>{
-    const index: number = this.inProgressJobs.indexOf(dJob);
-    if (index !== -1) {
-      this.inProgressJobs.splice(index, 1);
-      dJob.proceedDate = new Date();
-      this.unCheckedJobs.push(dJob);
-  ;
-    } 
-    else {
-      return of({success:false}).pipe(delay(100));
-    }
+
     return of({success:true}).pipe(delay(100));
   }
   setJobDone(dJob:JobModel):Observable<any>{
@@ -118,16 +89,6 @@ export class JobService {
   }
   setJobWrong(dJob:JobModel):Observable<any>{
   
-    const index: number = this.unCheckedJobs.indexOf(dJob);
-    if (index !== -1) {
-      this.unCheckedJobs.splice(index, 1);
-
-      this.newJobs.push(dJob);
-
-    } 
-    else {
-      return of({success:false}).pipe(delay(100));
-    }
     return of({success:true}).pipe(delay(100));
   }
   getHeaderOption():any{

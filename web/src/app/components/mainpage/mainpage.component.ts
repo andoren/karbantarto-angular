@@ -69,9 +69,11 @@ export class MainpageComponent implements OnInit {
   }
   onIClaimIt(job:JobModel):void{
     this.jobService.claimAJob(job).subscribe((result)=>{
-        if(result.success){
+          this.newJobs = this.newJobs.map(p => {if(p.id != job.id) return p});
+          job.worker = this.authGuard.getLoggedInUser();
+          this.inProgressJobs.push(job)
           this.snackService.openInformationSnackBar("Sikeresen elválata a munkát.","Munka");
-        }
+       
     },error=>{
         this.snackService.openInformationSnackBar("Hiba a munka elválalása közben. Keresse meg a rendszergazdát!","Munka");
     });
@@ -79,27 +81,32 @@ export class MainpageComponent implements OnInit {
   onJobToBeChecked(job:JobModel):void{
    
     this.jobService.setJobToBeChecked(job).subscribe((result)=>{
-      if(result.success){
-        this.snackService.openInformationSnackBar("Sikeresen leadta a munkát.","Munka");
-      }
+      this.inProgressJobs = this.inProgressJobs.map(p => {if(p.id != job.id) return p});
+      job.proceedDate = new Date();
+      this.checkNeededJobs.push(job)
+      this.snackService.openInformationSnackBar("Sikeresen elválata a munkát.","Munka");
+       
+     
   },error=>{
       this.snackService.openInformationSnackBar("Hiba a munka leadása közben. Keresse meg a rendszergazdát!","Munka");
   });
   }
   onJobDone(job:JobModel):void{
     this.jobService.setJobDone(job).subscribe((result)=>{
-      if(result.success){
-        this.snackService.openInformationSnackBar("A munkát sikeresen késznek jelölte!","Munka");
-      }
+      this.checkNeededJobs = this.checkNeededJobs.map(p => {if(p.id != job.id) return p});
+      job.doneDate = new Date();
+      this.currentMonthJobs.push(job);
+      this.snackService.openInformationSnackBar("A munkát sikeresen késznek jelölte!","Munka");
+   
   },error=>{
       this.snackService.openInformationSnackBar("Hiba a munka késznek nyilvánítása közben. Keresse meg a rendszergazdát!","Munka");
   });
   }
   onJobIsWrong(job:JobModel):void{
     this.jobService.setJobWrong(job).subscribe((result)=>{
-      if(result.success){
-        this.snackService.openInformationSnackBar("A elutasította. Vissza került az új munkák közé! Ott tudja módosítani a hiba leírását.","Munka");
-      }
+        this.router.navigate(["bejelenetkezes"]);
+        this.snackService.openInformationSnackBar("Az elutasítás sikeres. Vissza került az új munkák közé! Ott tudja módosítani a hiba leírását.","Munka");
+   
   },error=>{
       this.snackService.openInformationSnackBar("Hiba a munka elutasítása közben. Keresse meg a rendszergazdát!","Munka");
   });

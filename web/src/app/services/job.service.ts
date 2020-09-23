@@ -57,6 +57,7 @@ export class JobService {
   }
   modifyJob(mJob:JobModel):void{
     this.http.put(`${this.shared.JOB_BASE_URL}`,mJob,this.getHeaderOption()).subscribe(success=>{
+      this.router.navigate([""]);
       this.snackBarService.openInformationSnackBar("Sikeresen módosította a munkát.","Módosítási hiba")
     },error=>{
       this.snackBarService.openErrorSnackBar(error,"Módosítási hiba");
@@ -67,29 +68,19 @@ export class JobService {
   }
   claimAJob(cJob:JobModel):Observable<any>{
 
-    return of({success:true}).pipe(delay(100));
+    return this.http.post(`${this.shared.JOB_BASE_URL}/settostarted`,{workId:cJob.id},this.getHeaderOption());
   }
   setJobToBeChecked(dJob:JobModel):Observable<any>{
 
-    return of({success:true}).pipe(delay(100));
+    return this.http.post(`${this.shared.JOB_BASE_URL}/settoproceed`,{workId:dJob.id},this.getHeaderOption());
   }
   setJobDone(dJob:JobModel):Observable<any>{
-    const index: number = this.unCheckedJobs.indexOf(dJob);
-    if (index !== -1) {
-      this.unCheckedJobs.splice(index, 1);
-      dJob.doneDate = new Date();
-      dJob.isDone = true;
-      this.currentMonthJobs.push(dJob);
-
-    } 
-    else {
-      return of({success:false}).pipe(delay(100));
-    }
-    return of({success:true}).pipe(delay(100));
+   
+    return this.http.post(`${this.shared.JOB_BASE_URL}/settodone`,{workId:dJob.id},this.getHeaderOption());
   }
   setJobWrong(dJob:JobModel):Observable<any>{
   
-    return of({success:true}).pipe(delay(100));
+    return this.http.post(`${this.shared.JOB_BASE_URL}/rejectwork`,{workId:dJob.id},this.getHeaderOption());
   }
   getHeaderOption():any{
     return this.options = {

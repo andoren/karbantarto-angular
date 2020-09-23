@@ -32,8 +32,8 @@ export class ModifyjobComponent implements OnInit {
     id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     this.jobService.getJobById(id).subscribe((job)=>{
       this.job = job;
-      this.titleFormControl.setValue(this.job.getTitle());
-      this.descriptionFormControl.setValue(this.job.getDescription());
+      this.titleFormControl.setValue(this.job.title);
+      this.descriptionFormControl.setValue(this.job.description);
     });
 
    }
@@ -41,8 +41,8 @@ export class ModifyjobComponent implements OnInit {
   ngOnInit(): void {
   }
   modifyJob():void{
-    this.job.setDescription(this.descriptionFormControl.value);
-    this.job.setTitle(this.titleFormControl.value);
+    this.job.description = this.descriptionFormControl.value;
+    this.job.title = this.titleFormControl.value;
     this.jobService.modifyJob(this.job);
   }
 }

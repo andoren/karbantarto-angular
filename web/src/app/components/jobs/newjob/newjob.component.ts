@@ -25,18 +25,25 @@ export class NewjobComponent implements OnInit {
   }
 
   isNewJob():boolean{
- 
-   return !this.job.getWorker();
+    if(this.job == undefined){
+      return false;
+    }
+   return  this.job.worker == undefined || this.job.worker == null;
   }
   inProgressJob():boolean{
-
-    return this.job.getWorker() != null && this.job.getProceedDate() == null;
+    if(this.job == undefined){
+      return false;
+    }
+    return this.job.worker != null && this.job.proceedDate == null;
   }
   checkNeededForTheJob():boolean{
-    return this.job.getWorker() && this.job.getProceedDate() != undefined ;
+    if(this.job == undefined){
+      return false;
+    }
+    return this.job.worker && this.job.proceedDate != undefined ;
   }
   goToModifyJobPage():void{
-    this.router.navigate([`munkamodositas/${this.job.getId()}`]);
+    this.router.navigate([`munkamodositas/${this.job.id}`]);
   }
   onDeleteJob():void{
     this.deleteJob.emit(this.job);

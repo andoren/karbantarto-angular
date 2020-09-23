@@ -29,8 +29,8 @@ export class AddjobComponent implements OnInit {
 
   }
   addJob():void{
-    this.newJob.setTitle(this.titleFormControl.value);
-    this.newJob.setDescription(this.descriptionFormControl.value);
+    this.newJob.title = this.titleFormControl.value;
+    this.newJob.description = this.descriptionFormControl.value;
       this.jobService.addJob(this.newJob);
   }
 }

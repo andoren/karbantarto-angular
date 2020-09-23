@@ -68,8 +68,8 @@ export class MainpageComponent implements OnInit {
   }
   getNewJobs():void{
     this.jobService.getNewJobs().subscribe((jobs)=>{
-     
       this.newJobs = jobs;
+      console.log(this.newJobs);
     },error=>{
       this.snackService.openErrorSnackBar("Hiba az új munkák lekérése közben.","Lekérés");
     });

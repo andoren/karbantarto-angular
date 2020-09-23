@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedDataModule {
-  BASE_URL:string = "http://localhost:4200/api/v1";
+  BASE_URL:string = "http://10.5.23.134:4200/api/v1";
   USER_BASE_URL:string = this.BASE_URL+"/user";
   JOB_BASE_URL:string = this.BASE_URL+"/work";
   AREA_BASE_URL:string = this.BASE_URL+"/area";

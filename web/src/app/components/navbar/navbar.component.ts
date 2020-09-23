@@ -23,6 +23,6 @@ export class NavbarComponent {
   }
   getUserFullname():String{
  
-    return this.authGuard.getLoggedInUser().getFullname();
+    return this.authGuard.getLoggedInUser().fullname;
   }
 }

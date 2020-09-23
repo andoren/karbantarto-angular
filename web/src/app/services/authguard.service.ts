@@ -28,24 +28,20 @@ export class AuthguardService {
   
     return this.http.post<any>(`${this.sharedData.USER_BASE_URL}/login`,{"username":username,"password":password})
     .pipe(map(loggedInUser => {
-
-        let user:UserModel = new UserModel(loggedInUser.id,loggedInUser.fullName,loggedInUser.role);
-        user.setToken(loggedInUser.token);
-        if(user.getToken() && user.getToken() !== undefined && user.getToken() !== null){
-        this.cookieService.set("user",JSON.stringify(user),1);
-        this.currentUserSubject.next(user);
+        
+        if(loggedInUser && loggedInUser.token !== undefined && loggedInUser.token !== null){
+        this.cookieService.set("user",JSON.stringify(loggedInUser),1);
+        this.currentUserSubject.next(loggedInUser);
     
-        return user;
+        return loggedInUser;
         }
     }));
    }
     getLoggedInUser():UserModel{
       try{
-        let temp = JSON.parse(this.cookieService.get("user"));
-        let user:UserModel = new UserModel(temp.id,temp.fullname,Role[temp.role as keyof typeof Role]);
-        user.setToken(temp.token);
-     
-        return user;
+        let temp:UserModel = JSON.parse(this.cookieService.get("user"));
+        temp.token = temp.token;
+        return temp;
         }catch(error){
        
            return null;
@@ -53,17 +49,18 @@ export class AuthguardService {
    
    }  
    jobIsMine(job:JobModel):boolean{
-    return this.getLoggedInUser().getId() == job.getOwner().getId();
+    return this.getLoggedInUser().id == job.owner.id;
   }
   isUserJanitor():boolean{
-    return this.getLoggedInUser().getRole() == Role.Janitor;
+    var enumValue : Role = (<any>Role)[this.getLoggedInUser().role];
+    return enumValue  == Role.Janitor;
   }
   iStartedTheJob(job:JobModel):boolean{
-    return this.getLoggedInUser().getId() == job.getWorker().getId();
+    return this.getLoggedInUser().id == job.worker.id;
   }
    userIsAdministrator():boolean{
-
-    return this.getLoggedInUser().getRole() == Role.Admin;
+    var enumValue : Role = (<any>Role)[this.getLoggedInUser().role];
+    return enumValue  == Role.Admin;
   }
 
 }

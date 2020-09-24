@@ -11,13 +11,13 @@ export class SnackBarService {
   openInformationSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['mat-toolbar', 'mat-primary']
+      panelClass: ['mat-toolbar', 'mat-primary',"snack-btn"]
     });
   }
   openErrorSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['mat-toolbar', 'mat-warn',"warn-snack-btn"]
+      panelClass: ['mat-toolbar', 'mat-warn',"snack-btn"]
     });
   }
 }

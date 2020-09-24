@@ -7,12 +7,14 @@ import { ModifyjobComponent } from './components/modifyjob/modifyjob.component';
 import{LoggedinguardGuard} from './guard/loggedinguard.guard'
 import {AdminguardGuard} from './guard/adminguard.guard'
 import { LogoutComponent } from './components/logout/logout.component';
+import { UsersComponent } from './components/user/users/users.component';
 const routes: Routes = [
   {path: '', component: MainpageComponent,canActivate: [LoggedinguardGuard] },
   {path:'bejelentkezes',component:LoginComponent},
   {path:'ujmunka',component:AddjobComponent,canActivate: [LoggedinguardGuard]},
   {path:'munkamodositas/:id',component:ModifyjobComponent,canActivate: [LoggedinguardGuard]},
-  {path:'kijelentkezes',component:LogoutComponent,canActivate:[LoggedinguardGuard]}
+  {path:'kijelentkezes',component:LogoutComponent,canActivate:[LoggedinguardGuard]},
+  {path:'felhasznalok',component:UsersComponent,canActivate:[LoggedinguardGuard]}
 ];
 
 @NgModule({

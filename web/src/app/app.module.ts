@@ -25,6 +25,10 @@ import { AuthguardService } from './services/authguard.service';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AdduserComponent } from './components/user/adduser/adduser.component';
+import { ModifyuserComponent } from './components/user/modifyuser/modifyuser.component';
+import { UsersComponent } from './components/user/users/users.component';
+import { UserComponent } from './components/user/users/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,11 @@ import { LogoutComponent } from './components/logout/logout.component';
     AddjobComponent,
     NewjobComponent,
     ModifyjobComponent,
-    LogoutComponent
+    LogoutComponent,
+    AdduserComponent,
+    ModifyuserComponent,
+    UsersComponent,
+    UserComponent
     
   ],
   imports: [

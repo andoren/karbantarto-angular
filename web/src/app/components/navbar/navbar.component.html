@@ -12,25 +12,11 @@
       <li *ngIf="!authGuard.isUserJanitor()" class="nav-item">
         <a routerLink="ujmunka" class="nav-link" href="#">Munka hozzáadása</a>
       </li>
-      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Felhasználó kezelése
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Felhasználó hozzáadása</a>
-          <a class="dropdown-item" href="#">Felhasználó módosítása</a>
-          <a class="dropdown-item" href="#">Felhasználó törlése</a>
-        </div>
+      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item">
+        <a routerLink="felhasznalok" class="nav-link" href="#">Felhasználók</a>
       </li>
-      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Elhelyezkedések kezelése
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Elhelyezkedés hozzáadása</a>
-          <a class="dropdown-item" href="#">Elhelyezkedés módosítása</a>
-          <a class="dropdown-item" href="#">Elhelyezkedés törlése</a>
-        </div>
+      <li *ngIf="authGuard.userIsAdministrator()" class="nav-item">
+        <a routerLink="elhelyezkedesek" class="nav-link" href="#">Elhelyezkedések</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="kijelentkezes" href="#">Kijelentkezés</a>

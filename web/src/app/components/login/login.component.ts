@@ -61,8 +61,9 @@ export class LoginComponent implements OnInit {
          
         this.snackBar.openInformationSnackBar("Sikeres bejelentkezés","Bejelentkezés");
        },error=>{
-         console.log(error);
-        this.snackBar.openErrorSnackBar(error.message,"Bejelentkezés");
+         if(error.error.status ==401)this.snackBar.openErrorSnackBar("Hibás felhasználónév vagy jelszó!","Bejelentkezés");
+         else this.snackBar.openErrorSnackBar(error.message,"Bejelentkezés");
+        
        });
       } catch (err) {
        

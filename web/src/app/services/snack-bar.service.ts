@@ -17,7 +17,7 @@ export class SnackBarService {
   openErrorSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['mat-toolbar', 'mat-warn']
+      panelClass: ['mat-toolbar', 'mat-warn',"warn-snack-btn"]
     });
   }
 }

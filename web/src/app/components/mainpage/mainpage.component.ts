@@ -22,9 +22,9 @@ export class MainpageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.generateTempData();
+    this.getData();
   }
-  generateTempData():void{
+  getData():void{
     this.jobService.getInProgressJobs().subscribe((jobs)=>{
    
       this.inProgressJobs = jobs;
@@ -45,13 +45,19 @@ export class MainpageComponent implements OnInit {
       this.snackService.openErrorSnackBar("Hiba a ellenőrizendő munkák letöltése közben.","Munka");
     });
   }
+  getNewJobs():void{
+    this.jobService.getNewJobs().subscribe((jobs)=>{
+      this.newJobs = jobs;
+    },error=>{
+      this.snackService.openErrorSnackBar("Hiba az új munkák lekérése közben.","Lekérés");
+    });
+  }
   addJob(){
-  
     this.router.navigate(["ujmunka"]);
   }
   onDeleteJob(job:JobModel){
     this.jobService.deleteJob(job).subscribe(result=>{
-        this.getNewJobs();
+      window.location.reload();
         this.snackService.openInformationSnackBar("Sikeresen törölte a munkát!.","Munka");
     },error=>{
       if(error){
@@ -60,18 +66,10 @@ export class MainpageComponent implements OnInit {
     });
   
   }
-  getNewJobs():void{
-    this.jobService.getNewJobs().subscribe((jobs)=>{
-      this.newJobs = jobs;
-    },error=>{
-      this.snackService.openErrorSnackBar("Hiba az új munkák lekérése közben.","Lekérés");
-    });
-  }
+
   onIClaimIt(job:JobModel):void{
     this.jobService.claimAJob(job).subscribe((result)=>{
-          this.newJobs = this.newJobs.map(p => {if(p.id != job.id) return p});
-          job.worker = this.authGuard.getLoggedInUser();
-          this.inProgressJobs.push(job)
+          window.location.reload();
           this.snackService.openInformationSnackBar("Sikeresen elválata a munkát.","Munka");
        
     },error=>{
@@ -81,9 +79,7 @@ export class MainpageComponent implements OnInit {
   onJobToBeChecked(job:JobModel):void{
    
     this.jobService.setJobToBeChecked(job).subscribe((result)=>{
-      this.inProgressJobs = this.inProgressJobs.map(p => {if(p.id != job.id) return p});
-      job.proceedDate = new Date();
-      this.checkNeededJobs.push(job)
+      window.location.reload();
       this.snackService.openInformationSnackBar("Sikeresen elválata a munkát.","Munka");
        
      
@@ -93,9 +89,7 @@ export class MainpageComponent implements OnInit {
   }
   onJobDone(job:JobModel):void{
     this.jobService.setJobDone(job).subscribe((result)=>{
-      this.checkNeededJobs = this.checkNeededJobs.map(p => {if(p.id != job.id) return p});
-      job.doneDate = new Date();
-      this.currentMonthJobs.push(job);
+      window.location.reload();
       this.snackService.openInformationSnackBar("A munkát sikeresen késznek jelölte!","Munka");
    
   },error=>{
@@ -104,7 +98,7 @@ export class MainpageComponent implements OnInit {
   }
   onJobIsWrong(job:JobModel):void{
     this.jobService.setJobWrong(job).subscribe((result)=>{
-        this.router.navigate(["bejelenetkezes"]);
+      window.location.reload();
         this.snackService.openInformationSnackBar("Az elutasítás sikeres. Vissza került az új munkák közé! Ott tudja módosítani a hiba leírását.","Munka");
    
   },error=>{

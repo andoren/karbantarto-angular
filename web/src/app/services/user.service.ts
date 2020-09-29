@@ -18,7 +18,9 @@ export class UserService {
     return this.http.get<UserModel[]>(`${this.sharedData.USER_BASE_URL}`,this.getHeaderOption());
   }
 
-
+  deleteUserById(userId:number):Observable<any>{
+    return this.http.delete<any>(`${this.sharedData.USER_BASE_URL}/${userId}`,this.getHeaderOption());
+  }
   getHeaderOption():any{
     return this.options = {
       headers:new HttpHeaders({

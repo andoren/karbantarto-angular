@@ -9,7 +9,7 @@ import {UserService} from '../../../services/user.service'
 export class UsersComponent implements OnInit {
   users:UserModel[] = [];
   constructor(private userService:UserService) { }
-
+  displayedColumns: string[] = ['id', 'username', 'fullname', 'role'];
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe((users)=>{
       this.users = users;

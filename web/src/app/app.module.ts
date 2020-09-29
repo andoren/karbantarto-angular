@@ -29,6 +29,7 @@ import { AdduserComponent } from './components/user/adduser/adduser.component';
 import { ModifyuserComponent } from './components/user/modifyuser/modifyuser.component';
 import { UsersComponent } from './components/user/users/users.component';
 import { UserComponent } from './components/user/users/user/user.component';
+import { MatTableModule } from '@angular/material/table'  
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,8 @@ import { UserComponent } from './components/user/users/user/user.component';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
     
   ],
   providers: [CookieService],

@@ -1,1 +1,59 @@
-<h2>Új felhasználó hozzáadása:</h2>
+<h2>Új Felhasználó hozzáadása</h2>
+<div  style="width: 50%; padding:10px; float:left" >
+  <label>Teljes név:</label>
+  <br>
+  <mat-form-field name="fullname"  appearance="fill">
+    <mat-label>Pl.: Pekár Mihály</mat-label>
+    <input [formControl]="fullnameFormControl" matInput>
+  </mat-form-field>
+  <br>
+  <label>Felhasználó név:</label>
+  <br>
+  <mat-form-field  name="username"  appearance="fill">
+    <mat-label>Pl.: misike</mat-label>
+    <input [formControl]="usernameFormControl" matInput>
+  </mat-form-field>
+  <br>
+  <label>Jelszó:</label>
+  <br>
+  <mat-form-field name="password"   appearance="fill">
+    <mat-label>Pl.: Kiscica05</mat-label>
+    <input [formControl]="passwordFormControl" matInput>
+  </mat-form-field>
+  <br>
+  <label>Jogosultsági szint:</label>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Jogosultság</mat-label>
+    <mat-select [formControl]="roleFormControl">
+      <mat-option value="Admin">Admin</mat-option>
+      <mat-option value="Janitor">Karbantartó</mat-option>
+      <mat-option value="User">Felhasználó</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+</div>
+<div style="width: 50%; padding:10px; float: right;">
+  <label>Elhelyezkedések:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Pl.: Földszint</mat-label>
+    <mat-select [formControl]="areaFormControl" (selectionChange)="setChoosenArea ($event)" >
+      <mat-option disabled >Elhelyezkedés kiválasztása</mat-option>
+      <mat-option *ngFor="let area of areas" [value]="area">{{area.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <button [disabled]="!choosenArea" style="margin:5px" (click)="addAreaToList()" mat-raised-button color="primary">Hozzáadás</button>
+  <div style="margin-top: 10px;" *ngFor="let area of choosenAreas">
+    <mat-card style="width: 100%; min-height: 50px; ">
+     {{area.name}} 
+      <button style="float:right" mat-mini-fab color="warn" (click)="removeAreaFromList(area)" aria-label="Example icon button with a menu icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+    
+    </mat-card>
+  </div>
+</div>
+<div class="clearfix" ></div>
+<button style="width: 100%;"  [disabled]="!isValidForm()" mat-raised-button color="primary">Felhasználó hozzáadása</button>

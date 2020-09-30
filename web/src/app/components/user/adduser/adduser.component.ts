@@ -19,7 +19,9 @@ export class AdduserComponent implements OnInit {
   userForm:FormGroup;
   newUsername:String = "";
   newPassword:String = "";
-  newFullname:String=""
+  newFullname:String="";
+  occupiedEmail:boolean = false;
+  occupiedUsername:boolean = false;
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   constructor(private snackService:SnackBarService,private areaService:AreaService,private formBuilder: FormBuilder, private userService:UserService) {
     this.userForm = this.formBuilder.group({
@@ -50,8 +52,6 @@ export class AdduserComponent implements OnInit {
     this.choosenAreas.push(this.choosenArea);
     this.areas = this.areas.filter(a=>a.id != this.choosenArea.id);
     this.choosenArea = null;
-    console.log(this.userForm);
-    
   }
   removeAreaFromList(area):void{
     this.choosenAreas = this.choosenAreas.filter(a=>a.id != area.id);
@@ -60,6 +60,8 @@ export class AdduserComponent implements OnInit {
 
   }
   submit():void{
+    this.userForm.controls.username.setErrors(null); 
+    this.userForm.controls.password.setErrors(null);
     let newUser:UserModel = new UserModel();
     newUser.fullname = this.userForm.value.fullname;
     newUser.username = this.userForm.value.username;
@@ -67,12 +69,16 @@ export class AdduserComponent implements OnInit {
     newUser.role = this.userForm.value.role;
     newUser.email = this.userForm.value.email;
     newUser.areas = this.choosenAreas;
-    console.log(newUser);
+    this.occupiedEmail = false;
+    this.occupiedUsername = false;
     this.userService.adduser(newUser).subscribe(()=>{
       this.snackService.openInformationSnackBar("Sikeresen hozzáadta az új felhasználót.","Felhasználó");
       window.location.reload();
     },error=>{
-      this.snackService.openErrorSnackBar(error,"Hiba");
+      if (error.error.includes("felhasználó"))this.userForm.controls.username.setErrors({occupied:true}); 
+      else this.userForm.controls.email.setErrors({occupied:true});
+      console.log(this.occupiedEmail);
+      this.snackService.openErrorSnackBar(error.error,"Hiba");
     });
   }
 }

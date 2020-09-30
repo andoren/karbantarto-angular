@@ -10,6 +10,7 @@
         <mat-error *ngIf="userForm.controls.fullname.touched && userForm.controls.fullname.invalid">
           <span *ngIf="userForm.controls.fullname.errors.required">Ez a mező kötelező. </span>
           <span *ngIf="!userForm.controls.fullname.errors.valid">A Teljes név hossza 7 és 50 karakter között kell, hogy legyen!</span>
+        
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="outline">
@@ -19,7 +20,8 @@
         <input matInput formControlName="username" required>
         <mat-error *ngIf="userForm.controls.username.touched && userForm.controls.username.invalid">
           <span *ngIf="userForm.controls.username.errors.required">Ez a mező kötelező. </span>
-          <span *ngIf="!userForm.controls.username.errors.valid">A Felhasználó név hossza 4 és 15 karakter között kell, hogy legyen!</span>
+          <span *ngIf="!userForm.controls.username.errors.valid">A Felhasználó név hossza 4 és 15 karakter között kell, hogy legyen! </span>
+          <span *ngIf="userForm.controls.username.errors.occupied">A felhasználó név már foglalt.</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="outline">
@@ -37,9 +39,11 @@
         <input matInput formControlName="email" type="email">
         <mat-error *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
           <span *ngIf="userForm.controls.email.errors.required">Ez a mező kötelező. </span>
-          <span *ngIf="!userForm.controls.email.errors.regex">Kérem adjon meg egy valós e-mail címet.</span>
+          <span *ngIf="userForm.controls.email.errors.regex">Kérem adjon meg egy valós e-mail címet.</span>
+          <span *ngIf="userForm.controls.email.errors.occupied">Az e-mail cím már foglalt. </span>
         </mat-error>
       </mat-form-field>
+      
       <mat-form-field appearance="fill">
         <mat-label>Jogosultság</mat-label>
         <mat-select formControlName="role">

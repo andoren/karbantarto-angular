@@ -50,6 +50,7 @@ export class AdduserComponent implements OnInit {
     this.choosenAreas.push(this.choosenArea);
     this.areas = this.areas.filter(a=>a.id != this.choosenArea.id);
     this.choosenArea = null;
+    console.log(this.userForm);
     
   }
   removeAreaFromList(area):void{
@@ -65,7 +66,9 @@ export class AdduserComponent implements OnInit {
     newUser.password = this.userForm.value.password;
     newUser.role = this.userForm.value.role;
     newUser.email = this.userForm.value.email;
-    this.userService.adduser(newUser,this.choosenAreas).subscribe(()=>{
+    newUser.areas = this.choosenAreas;
+    console.log(newUser);
+    this.userService.adduser(newUser).subscribe(()=>{
       this.snackService.openInformationSnackBar("Sikeresen hozzáadta az új felhasználót.","Felhasználó");
       window.location.reload();
     },error=>{

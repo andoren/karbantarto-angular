@@ -31,6 +31,15 @@
           <span *ngIf="!userForm.controls.password.errors.valid">A jelszó 6 és 12 karakter között kell, hogy legyen.</span>
         </mat-error>
       </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> E-mail
+        </mat-label>
+        <input matInput formControlName="email" type="email">
+        <mat-error *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
+          <span *ngIf="userForm.controls.email.errors.required">Ez a mező kötelező. </span>
+          <span *ngIf="!userForm.controls.email.errors.regex">Kérem adjon meg egy valós e-mail címet.</span>
+        </mat-error>
+      </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Jogosultság</mat-label>
         <mat-select formControlName="role">
@@ -42,6 +51,8 @@
     </div>
 
     <div style="width: 50%; padding:10px; float: right;">
+      <span *ngIf="userForm.controls.role.value == 'Janitor' ;else elseblock">Karbantartóknak nincs lehetőség elhelyezkedés kiválasztására.</span>
+      <ng-template #elseblock>
       <mat-form-field appearance="fill">
         <mat-label>Elhelyezkedések</mat-label>
         <mat-select (selectionChange)="setChoosenArea ($event)" >
@@ -60,10 +71,11 @@
         
         </mat-card>
       </div>
+    </ng-template>
     </div>
     <div class="clearfix" ></div>
     
-      <button style="width: 100%;"  [disabled]="userForm.invalid || !(choosenAreas.length > 0)" type="submit" mat-raised-button color="primary">Felhasználó hozzáadása</button>
+      <button style="width: 100%;"  [disabled]="userForm.invalid || (choosenAreas.length == 0 && userForm.controls.role.value != 'Janitor' ) " type="submit" mat-raised-button color="primary">Felhasználó hozzáadása</button>
     </form>
   </div>
 </div>

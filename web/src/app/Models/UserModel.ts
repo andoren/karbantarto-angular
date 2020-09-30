@@ -1,3 +1,4 @@
+import { AreaModel } from './AreaModel';
 import { Role } from './role.enum';
 
 export class UserModel{
@@ -8,4 +9,5 @@ export class UserModel{
     token:String;
     email:String;
     password:String;
+    areas:AreaModel[];
 }

@@ -18,8 +18,8 @@ export class UserService {
   getAllUsers():Observable<any>{
     return this.http.get<UserModel[]>(`${this.sharedData.USER_BASE_URL}`,this.getHeaderOption());
   }
-  adduser(newUser:UserModel, userAreas:AreaModel[]):Observable<any>{
-    return this.http.post<any>(`${this.sharedData.USER_BASE_URL}`,{user:newUser,areas:userAreas},this.getHeaderOption());
+  adduser(newUser:UserModel):Observable<any>{
+    return this.http.post<any>(`${this.sharedData.USER_BASE_URL}`,newUser,this.getHeaderOption());
   }
   deleteUserById(userId:number):Observable<any>{
     return this.http.delete<any>(`${this.sharedData.USER_BASE_URL}/${userId}`,this.getHeaderOption());

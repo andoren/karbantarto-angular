@@ -1,8 +1,8 @@
 
-<!------>
 <div style="padding: 15px;">
    <h1>Felhasználók kezelése</h1>
-    <app-adduser></app-adduser>
+    <app-adduser  *ngIf="!userToModify;else modifyblock"></app-adduser>
+    <ng-template #modifyblock><app-modifyuser (userChanged)="userChanged()" [user]="userToModify"></app-modifyuser></ng-template>
     <h2>Felhasználók:</h2>
     <table mat-table [dataSource]="users" class="mat-elevation-z8">
    

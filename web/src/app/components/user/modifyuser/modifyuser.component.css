@@ -1,0 +1,11 @@
+.mat-form-field{
+  width: 100%;
+}
+.clearfix {
+  overflow: auto;
+  clear: both;
+}
+.mat-card>:last-child:not(.mat-card-footer){
+  margin-top: -10px;
+  margin-bottom: 0;
+}

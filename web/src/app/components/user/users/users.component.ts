@@ -10,6 +10,7 @@ import {UserService} from '../../../services/user.service'
 })
 export class UsersComponent implements OnInit {
   users:UserModel[] = [];
+  userToModify:UserModel;
   constructor(private userService:UserService,private snackService:SnackBarService, private router:Router) { }
   displayedColumns: string[] = ['id', 'username', 'fullname', 'role', 'modify','delete'];
   ngOnInit(): void {
@@ -23,7 +24,12 @@ export class UsersComponent implements OnInit {
     });
   }
   modifyUser(e):void{
-    this.router.navigate(["felhasznalomodositas/"+e.id]);
+    this.userToModify = null;
+    setTimeout(() => this.userToModify = e);
+    
+  }
+  userChanged():void{
+    this.userToModify = null;
   }
   deleteUser(e):void{
 

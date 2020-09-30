@@ -21,6 +21,9 @@ export class UserService {
   adduser(newUser:UserModel):Observable<any>{
     return this.http.post<any>(`${this.sharedData.USER_BASE_URL}`,newUser,this.getHeaderOption());
   }
+  modifyUser(newUser:UserModel):Observable<any>{
+    return this.http.put<any>(`${this.sharedData.USER_BASE_URL}`,newUser,this.getHeaderOption());
+  }
   deleteUserById(userId:number):Observable<any>{
     return this.http.delete<any>(`${this.sharedData.USER_BASE_URL}/${userId}`,this.getHeaderOption());
   }

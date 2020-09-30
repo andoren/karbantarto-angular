@@ -1,1 +1,91 @@
-<p>modifyuser works!</p>
+<div >
+  <div class="form-container">
+    <form [formGroup]="userForm" (submit)="submit()">
+      <div style="width: 50%; padding:10px; float:left">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> 
+          Teljes név
+        </mat-label>
+        <input matInput formControlName="fullname" required>
+        <mat-error *ngIf="userForm.controls.fullname.touched && userForm.controls.fullname.invalid">
+          <span *ngIf="userForm.controls.fullname.errors.required">Ez a mező kötelező. </span>
+          <span *ngIf="!userForm.controls.fullname.errors.valid">A Teljes név hossza 7 és 50 karakter között kell, hogy legyen!</span>
+        
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> 
+          Felhasználó név
+        </mat-label>
+        <input matInput formControlName="username" required>
+        <mat-error *ngIf="userForm.controls.username.touched && userForm.controls.username.invalid">
+          <span *ngIf="userForm.controls.username.errors.required">Ez a mező kötelező. </span>
+          <span *ngIf="!userForm.controls.username.errors.valid">A Felhasználó név hossza 4 és 15 karakter között kell, hogy legyen! </span>
+          <span *ngIf="userForm.controls.username.errors.occupied">A felhasználó név már foglalt.</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> Jelszó
+        </mat-label>
+        <input matInput formControlName="password" type="password">
+        <mat-error *ngIf="userForm.controls.password.touched && userForm.controls.password.invalid">
+          <span *ngIf="userForm.controls.password.errors.required">Ez a mező kötelező. </span>
+          <span *ngIf="!userForm.controls.password.errors.valid">A jelszó 6 és 12 karakter között kell, hogy legyen.</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> E-mail
+        </mat-label>
+        <input matInput formControlName="email" type="email">
+        <mat-error *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
+          <span *ngIf="userForm.controls.email.errors.required">Ez a mező kötelező. </span>
+          <span *ngIf="userForm.controls.email.errors.regex">Kérem adjon meg egy valós e-mail címet.</span>
+          <span *ngIf="userForm.controls.email.errors.occupied">Az e-mail cím már foglalt. </span>
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Jogosultság</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="Admin">Admin</mat-option>
+          <mat-option value="Janitor">Karbantartó</mat-option>
+          <mat-option value="User">Felhasználó</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div style="width: 50%; padding:10px; float: right;">
+      <span *ngIf="userForm.controls.role.value == 'Janitor' ;else elseblock">Karbantartóknak nincs lehetőség elhelyezkedés kiválasztására.</span>
+      <ng-template #elseblock>
+      <mat-form-field appearance="fill">
+        <mat-label>Elhelyezkedések</mat-label>
+        <mat-select (selectionChange)="setChoosenArea ($event)" >
+          <mat-option disabled >Elhelyezkedés kiválasztása</mat-option>
+          <mat-option *ngFor="let area of areas" [value]="area">{{area.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button [disabled]="!choosenArea" style="margin:5px" (click)="addAreaToList()" mat-raised-button color="primary">Hozzáadás</button>
+      <div style="margin-top: 10px;" *ngFor="let area of choosenAreas">
+        <mat-card style="width: 100%; min-height: 50px; ">
+         {{area.name}} 
+          <button style="float:right" mat-mini-fab color="warn" (click)="removeAreaFromList(area)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        
+        </mat-card>
+      </div>
+    </ng-template>
+    </div>
+    <div class="clearfix" ></div>
+    
+      <button style="width: 100%;"  [disabled]="userForm.invalid || (choosenAreas.length == 0 && userForm.controls.role.value != 'Janitor' ) " type="submit" mat-raised-button color="primary">Felhasználó módosítása.</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+

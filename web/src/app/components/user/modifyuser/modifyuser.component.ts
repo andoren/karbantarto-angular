@@ -77,8 +77,8 @@ export class ModifyuserComponent implements OnInit {
     newUser.role = this.userForm.value.role;
     newUser.email = this.userForm.value.email;
     newUser.areas = this.choosenAreas;
-    this.occupiedEmail = false;
-    this.occupiedUsername = false;
+    newUser.id = this.user.id;
+    
     this.userService.modifyUser(newUser).subscribe(()=>{
       this.snackService.openInformationSnackBar("Sikeresen módosította a felhasználót.","Felhasználó");
       window.location.reload();

@@ -1,0 +1,41 @@
+<div style="padding: 15px;">
+  <h1>Elhelyezkedések kezelése</h1>
+  <app-addarea *ngIf="!areaToModify;else modifyblock"></app-addarea>
+  <ng-template #modifyblock>
+    <app-modifyarea (areaChanged)="areaChanged()" [area]="areaToModify"></app-modifyarea>
+  </ng-template>
+  <h2>Elhelyezkedések:</h2>
+  <table mat-table [dataSource]="areas" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let area"> {{area.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Megnevezés </th>
+      <td mat-cell *matCellDef="let area">{{area.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="boss">
+      <th mat-header-cell *matHeaderCellDef> A terület fönöke </th>
+      <td mat-cell *matCellDef="let area"> {{area.boss.fullname}} </td>
+    </ng-container>
+    <ng-container matColumnDef="modify">
+      <th mat-header-cell *matHeaderCellDef> Módosítás </th>
+      <td mat-cell *matCellDef="let area">
+        <button mat-mini-fab color="primary" (click)="modifyArea(area)">       
+          <mat-icon>build</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Törlés </th>
+      <td mat-cell *matCellDef="let area">
+        <button mat-mini-fab color="warn" (click)="deleteArea(area)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

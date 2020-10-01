@@ -29,7 +29,10 @@ import { AdduserComponent } from './components/user/adduser/adduser.component';
 import { ModifyuserComponent } from './components/user/modifyuser/modifyuser.component';
 import { UsersComponent } from './components/user/users/users.component';
 import { UserComponent } from './components/user/users/user/user.component';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table';
+import { AreasComponent } from './components/areas/areas.component';
+import { AddareaComponent } from './components/areas/addarea/addarea.component';
+import { ModifyareaComponent } from './components/areas/modifyarea/modifyarea.component'  
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +47,10 @@ import { MatTableModule } from '@angular/material/table'
     AdduserComponent,
     ModifyuserComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    AreasComponent,
+    AddareaComponent,
+    ModifyareaComponent
     
   ],
   imports: [

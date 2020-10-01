@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
       this.getAllUser();
       this.snackService.openInformationSnackBar(`Sikeresen törölte a "${e.fullname}" nevű felhasználót.`,"Felhasználó");
     },error=>{
-        this.snackService.openErrorSnackBar(error,"Felhasználó törlése hiba.");
+        this.snackService.openErrorSnackBar(error.error,"Felhasználó törlése hiba.");
     });
     
   }

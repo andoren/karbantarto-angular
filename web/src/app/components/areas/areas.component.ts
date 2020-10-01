@@ -38,7 +38,7 @@ export class AreasComponent implements OnInit {
       this.getAllAreas();
       this.snackService.openInformationSnackBar(`Sikeresen törölte a "${e.fullname}" nevű egységet.`,"Elhelyezkedések");
     },error=>{
-        this.snackService.openErrorSnackBar(error,"Elhelyezkedés törlése hiba.");
+        this.snackService.openErrorSnackBar(error.error,"Elhelyezkedés törlése hiba.");
     });
     
   }

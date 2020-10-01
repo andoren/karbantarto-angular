@@ -26,7 +26,7 @@ export class AddareaComponent implements OnInit {
   }
   getAllUser(): void {
     this.userService.getAllUsers().subscribe((users) => {
-      this.users = users;
+      this.users = users.filter(u=>u.role != "Janitor");
     }, error => {
       console.log(error);
     });

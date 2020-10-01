@@ -35,7 +35,7 @@ export class AddareaComponent implements OnInit {
     let area:AreaModel = new AreaModel();
     area.name = this.areaForm.value.name;
     area.boss = this.areaForm.value.boss;
-    console.log(area);
+
     this.areaService.addArea(area).subscribe(result=>{
       window.location.reload();
       this.snackService.openInformationSnackBar("Sikeresen hozzáadott egy új elhelyezkedést.","Elhelyezkedés.");

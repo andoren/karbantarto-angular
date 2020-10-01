@@ -1,1 +1,32 @@
-<p>modifyarea works!</p>
+<div >
+  <div class="form-container">
+    <form [formGroup]="areaForm" (submit)="submit()">
+      <div style="padding:10px; ">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> 
+          Elhelyezkedés neve
+        </mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="areaForm.controls.name.touched && areaForm.controls.name.invalid">
+          <span *ngIf="areaForm.controls.name.errors.required">Ez a mező kötelező. </span>
+          <span *ngIf="!areaForm.controls.name.errors.valid">A megnevezés hossza 4 és 20 karakter között kell, hogy legyen!</span>
+        </mat-error>
+      </mat-form-field>
+      <br/>
+      <mat-form-field appearance="fill">
+        <mat-label>Fönök</mat-label>
+        <mat-select [(value)]="area.boss" formControlName="boss" >
+          <mat-option default [value]="area.boss">{{area.boss.fullname}}</mat-option>
+          <mat-option *ngFor="let user of users" [value]=user>{{user.fullname}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="areaForm.controls.boss.touched && areaForm.controls.boss.invalid">
+          <span *ngIf="areaForm.controls.boss.errors.required">Ez a mező kötelező. </span>
+        </mat-error>
+        <mat-hint>*A fönök fog értesítést kapni, ha egy munka befejeződött a karbantartó által.</mat-hint>
+      </mat-form-field>
+     
+    </div>   
+      <button style="width: 100%;"  [disabled]="areaForm.invalid  " type="submit" mat-raised-button color="primary">Elhelyezkedés módosítása</button>
+    </form>
+  </div>
+</div>

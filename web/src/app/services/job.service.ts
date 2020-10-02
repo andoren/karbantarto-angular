@@ -33,7 +33,7 @@ export class JobService {
     return this.http.get<JobModel[]>(`${this.shared.JOB_BASE_URL}/getstartedworks`,this.getHeaderOption());
 
   }
-  getCurrentMonthDoneJobs():Observable<any>{
+  getCurrentWeekDoneJobs():Observable<any>{
     return this.http.get<JobModel[]>(`${this.shared.JOB_BASE_URL}/getdoneworks`,this.getHeaderOption());
 
   }

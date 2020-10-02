@@ -61,12 +61,12 @@
         <mat-card-header>
             <mat-card-title >  
                 <mat-icon  > assignment_turned_in</mat-icon>
-                <span >Havi elvégzett feladatok listája</span>
+                <span >Heti elvégzett feladatok listája</span>
             </mat-card-title> 
           
         </mat-card-header>
-        <div *ngIf="inProgressJobs.length != 0; else elseBlock">
-            <mat-card-content  *ngFor="let job of currentMonthJobs">
+        <div *ngIf="currentWeekJobs.length != 0; else elseBlock">
+            <mat-card-content  *ngFor="let job of currentWeekJobs">
                 <app-newjob [job]=job></app-newjob>
                
             </mat-card-content>

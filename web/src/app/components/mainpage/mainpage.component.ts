@@ -15,7 +15,7 @@ export class MainpageComponent implements OnInit {
 
   inProgressJobs:JobModel[] = [];
   newJobs:JobModel[] = [];
-  currentMonthJobs:JobModel[]=[];
+  currentWeekJobs:JobModel[]=[];
   checkNeededJobs:JobModel[]=[];
   constructor(public authGuard:AuthguardService, private jobService:JobService, private router:Router, private snackService:SnackBarService) {
     
@@ -32,9 +32,10 @@ export class MainpageComponent implements OnInit {
       this.snackService.openErrorSnackBar("Hiba a folyamatban lévő munkák lekérése közben.","Lekérés");
     });
     this.getNewJobs();
-    this.jobService.getCurrentMonthDoneJobs().subscribe((jobs)=>{
+    this.jobService.getCurrentWeekDoneJobs().subscribe((jobs)=>{
      
-      this.currentMonthJobs = jobs;
+      this.currentWeekJobs = jobs;
+      console.log(jobs);
     },error=>{
       this.snackService.openErrorSnackBar("Hiba a havi munkák lekérése közben","Munka");
     });

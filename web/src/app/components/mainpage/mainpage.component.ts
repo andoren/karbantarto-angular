@@ -57,7 +57,8 @@ errorCallBack(error):void {
 }
 onMessageReceived(message) {
   this.getData();   
-  if(this.itWasMe){
+  if(!this.itWasMe){
+ 
     this.snackService.openInformationSnackBar(message.body,"Szerver üzenet");
   }
   this.itWasMe = false;
@@ -105,8 +106,8 @@ onMessageReceived(message) {
     });
   
   }
-
   onIClaimIt(job:JobModel):void{
+    this.itWasMe = true;
     this.jobService.claimAJob(job).subscribe((result)=>{
        
           this.snackService.openInformationSnackBar("Sikeresen elválata a munkát.","Munka");

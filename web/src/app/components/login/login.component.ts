@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
       ]),
       password : new FormControl("", [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(200)
+        Validators.minLength(6),
+        Validators.maxLength(12)
       ])
     });
     if ( this.authGuard.getLoggedInUser()) {

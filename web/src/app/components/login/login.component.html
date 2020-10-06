@@ -23,12 +23,15 @@
               </mat-error>
             </mat-form-field>
         <br/>
-            <mat-form-field class="full-width-input">
-              <input type="password" matInput type="Jelszó" placeholder="Jelszó" formControlName="password" required>
-              <mat-error>
-                Hibás jelszó.
-              </mat-error>
-            </mat-form-field>
+        <mat-form-field class="form-field full-width-input" >
+          <mat-label> Jelszó
+          </mat-label>
+          <input matInput formControlName="password" type="password">
+          <mat-error *ngIf="form.controls.password.touched && form.controls.password.invalid">
+            <span *ngIf="form.controls.password.errors.required">Ez a mező kötelező. </span>
+            <span *ngIf="!form.controls.password.errors.valid">A jelszó 6 és 12 karakter között kell, hogy legyen.</span>
+          </mat-error>
+        </mat-form-field>
             <br/>
             <button  style="width: 100%;" mat-raised-button color="primary">Bejelentkezés</button>
           </form>

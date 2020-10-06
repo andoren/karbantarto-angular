@@ -7,17 +7,17 @@
         </p>           
         <div *ngIf="isNewJob()">     
             <div style="width:100%; display:float">
-                <p ><b>Beíró:</b> {{job?.owner.fullname}}  <br/> <b>Feltéve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
+                <p  ><b>Beíró:</b> {{job?.owner.fullname}} <br/> <b>Terület:</b> {{job?.area.name}}<br/> <b>Feltéve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
                
             </div>    
             <button *ngIf="authGuard.isUserJanitor()" (click)="onIClaimIt()" mat-raised-button color="primary">Elválalom</button>
-            <button  *ngIf="authGuard.jobIsMine(job)" (click)="goToModifyJobPage()"  mat-raised-button color="primary">Módosítás</button>
+            <button  *ngIf="authGuard.jobIsMine(job) || authGuard.iAmTheAreaBoss(job)" (click)="goToModifyJobPage()"  mat-raised-button color="primary">Módosítás</button>
             &nbsp;
-            <button *ngIf="authGuard.jobIsMine(job)" (click)="onDeleteJob()" mat-raised-button color="warn">Törlés</button>    
+            <button *ngIf="authGuard.jobIsMine(job) || authGuard.iAmTheAreaBoss(job)" (click)="onDeleteJob()" mat-raised-button color="warn">Törlés</button>    
          </div>         
          <div *ngIf="inProgressJob()" >
             <div style="width:100%; display:float">
-                <p class="leftsideinformation" ><b>Beíró:</b> {{job?.owner.fullname}}  <br/> <b>Feltéve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
+                <p  class="leftsideinformation" ><b>Beíró:</b> {{job?.owner.fullname}} <br/><b>Terület:</b> {{job?.area.name}} <br/> <b>Feltéve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
                 <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job?.worker.fullname}}</p>
                 <p class="clearfix"></p>
             </div>    
@@ -26,16 +26,14 @@
      
         <div *ngIf="checkNeededForTheJob()">
             <div style="width:100%; display:float">
-                <p class="leftsideinformation" ><b>Beíró:</b> {{job?.owner.fullname}}  <br/> <b>Feltéve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
+                <p class="leftsideinformation" ><b>Beíró:</b> {{job?.owner.fullname}} <br/><b>Terület:</b> {{job?.area.name}} <br/> <b>Feltéve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
                 <p class="rightsideinformation"  ><b>Elvállalta:</b> {{job?.worker.fullname}} <br/>  <b>Feladat elkészítve:</b> {{job?.createdDate | date:'yyyy-MM-dd'}}</p>
                 <p class="clearfix"></p>
             </div>     
-            <div *ngIf="authGuard.jobIsMine(job) && !job?.doneDate">
+            <div *ngIf="authGuard.iAmTheAreaBoss(job) && !job?.doneDate">
                 <button  mat-raised-button color="primary" (click)="onJobIsDone()" >Hitelesít</button>
                 &nbsp;
                 <button mat-raised-button color="warn" (click)="onJobIsWrong()">Visszadob</button>
             </div>
         </div>   
-
-
 </mat-card>

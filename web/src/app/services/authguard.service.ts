@@ -48,6 +48,9 @@ export class AuthguardService {
         }
    
    }  
+   iAmTheAreaBoss(job:JobModel):boolean{
+      return this.getLoggedInUser().id == job.area.boss.id;
+   }
    jobIsMine(job:JobModel):boolean{
     return this.getLoggedInUser().id == job.owner.id;
   }

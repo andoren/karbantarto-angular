@@ -19,7 +19,7 @@ export class AddjobComponent implements OnInit {
   newJobDescription:String = "";
   newJob:JobModel = new JobModel();
   areas:AreaModel[] = [];
-  selectedArea:AreaModel;
+  selectedArea:AreaModel = null;
   titleFormControl = new FormControl(this.newJobTitle, [
     Validators.required,
     Validators.minLength(10),

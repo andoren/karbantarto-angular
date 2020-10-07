@@ -1,16 +1,4 @@
-.leftsideinformation{
-    border-right: 1px solid lightgray;
 
-    width: 50%; 
-    float:left;
-    min-height: 50px;
-}
-.rightsideinformation{
-    min-height: 50px;
-    padding:5px;
-    width: 50%; 
-    float:right;
-}
 .jobtitle{
     border: 2px solid #3f51b5;
     border-top-left-radius: 25px;

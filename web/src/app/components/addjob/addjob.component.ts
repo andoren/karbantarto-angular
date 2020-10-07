@@ -19,7 +19,7 @@ export class AddjobComponent implements OnInit {
   newJobDescription:String = "";
   newJob:JobModel = new JobModel();
   areas:AreaModel[] = [];
-  selectedArea:AreaModel = new AreaModel() ;
+  selectedArea:AreaModel;
   titleFormControl = new FormControl(this.newJobTitle, [
     Validators.required,
     Validators.minLength(10),
@@ -30,7 +30,7 @@ export class AddjobComponent implements OnInit {
     Validators.minLength(20),
     Validators.maxLength(1000)
   ]);
-  areaFormControl = new FormControl(this.selectedArea);
+  areaFormControl = new FormControl(this.selectedArea,[Validators.required]);
   ngOnInit(): void {
     this.areaService.getAreaByUserId().subscribe(areas=>{
       this.areas = areas;

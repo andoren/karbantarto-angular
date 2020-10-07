@@ -5,6 +5,11 @@
   <mat-form-field appearance="fill">
     <mat-label>A hiba rövid leírása</mat-label>
     <input [formControl]="titleFormControl" matInput>
+    <mat-error *ngIf="titleFormControl.touched && titleFormControl.invalid">
+      <span *ngIf="titleFormControl.errors.required">Ez a mező kötelező. </span>
+      <span *ngIf="!titleFormControl.errors.valid">A Teljes név hossza 10 és 100 karakter között kell, hogy legyen!</span>
+    
+    </mat-error>
   </mat-form-field>
   <br>
   <label>Leírás:</label>
@@ -12,7 +17,13 @@
   <mat-form-field appearance="fill">
     <mat-label>A hiba elhelyezkedéséről és mivoltjáról egy jól megfogalmazott leírása.</mat-label>
     <textarea [formControl]="descriptionFormControl" matInput></textarea>
+    <mat-error *ngIf="descriptionFormControl.touched && descriptionFormControl.invalid">
+      <span *ngIf="descriptionFormControl.errors.required">Ez a mező kötelező. </span>
+      <span *ngIf="!descriptionFormControl.errors.valid">A Teljes név hossza 20 és 1000 karakter között kell, hogy legyen!</span>
+    
+    </mat-error>
   </mat-form-field>
+
   <br>
   <label>Elhelyezkedés:</label>
   <br>
@@ -21,7 +32,11 @@
     <mat-select  [formControl]="areaFormControl">
       <mat-option disabled >Elhelyezkedés kiválasztása</mat-option>
       <mat-option *ngFor="let area of areas" [value]="area">{{area.name}}</mat-option>
+
     </mat-select>
+    <mat-error *ngIf="areaFormControl.touched && areaFormControl.invalid">
+      <span *ngIf="areaFormControl.errors.required">Ez a mező kötelező. </span>
+    </mat-error>
   </mat-form-field>
 
   <br>

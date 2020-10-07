@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit {
   users:UserModel[] = [];
   userToModify:UserModel;
   constructor(private userService:UserService,private snackService:SnackBarService, private router:Router) { }
-  displayedColumns: string[] = ['id', 'username', 'email','fullname', 'role', 'modify','delete'];
+  displayedColumns: string[] = ['username', 'email','fullname', 'role', 'modify','delete'];
   ngOnInit(): void {
     this.getAllUser();
   }

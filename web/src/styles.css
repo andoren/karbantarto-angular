@@ -9,3 +9,6 @@ body {
 .snack-btn button{
    color:white;
 }
+.mat-figure{
+   display: block !important;
+}

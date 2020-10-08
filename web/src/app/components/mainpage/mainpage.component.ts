@@ -13,7 +13,7 @@ import * as SockJS from 'sockjs-client';
 })
 export class MainpageComponent implements OnInit {
 
-  webSocketEndPoint: string = 'http://192.168.88.13:1991/ws';
+  webSocketEndPoint: string = 'http://10.5.23.203:5555/ws';
   topic: string = "/work/reload";
   stompClient: any;
   itWasMe:boolean = false;

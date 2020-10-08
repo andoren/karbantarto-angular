@@ -1,9 +1,7 @@
 {
     "/api/v1/*": {
-        "target": "http://192.168.88.13:1991",
-        "secure": false,
-        "logLevel": "debug",
-        
+        "target": "http://10.5.23.134:1991",
+        "secure": false,      
         "changeOrigin": true
     }
   }
